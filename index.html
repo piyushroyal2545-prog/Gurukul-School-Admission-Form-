@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गुरुकुल सीनियर सेकेंडरी स्कूल - मुख्य पोर्टल</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: #ffffff;
+            padding: 45px 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 110px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        h1 {
+            font-size: 22px;
+            color: #0a192f;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        p.subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn-main, .btn-scholarship {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .btn-main {
+            background: linear-gradient(to right, #2563eb, #1d4ed8);
+            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+        }
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(to right, #1d4ed8, #1e40af);
+        }
+        .btn-scholarship {
+            background: linear-gradient(to right, #10b981, #059669);
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+        }
+        .btn-scholarship:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(to right, #059669, #047857);
+        }
+        .btn-main:active, .btn-scholarship:active {
+            transform: translateY(1px);
+        }
+        .footer-details {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.8;
+        }
+        .footer-details span {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* OTP Modal Design */
+        #otpModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-box {
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .modal-box h3 {
+            color: #0a192f;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .modal-box p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+        .otp-input {
+            width: 100%;
+            padding: 14px;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 8px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            outline: none;
+            font-weight: 700;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: border-color 0.3s;
+        }
+        .otp-input:focus {
+            border-color: #2563eb;
+            background: #ffffff;
+        }
+        .btn-verify {
+            width: 100%;
+            padding: 14px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-verify:hover {
+            background: #059669;
+        }
+        .error-msg {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+            font-weight: 500;
+        }
+        .cancel-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        .cancel-btn:hover {
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo-container">
+        <img src="https://i.ibb.co/rKh8kdsd/In-Shot-20260723-202840730.png" alt="Gurukul Logo" class="logo">
+    </div>
+    <h1>गुरुकुल सीनियर सेकेंडरी स्कूल</h1>
+    <p class="subtitle">भाड़ासर रोड, धनकोली</p>
+    
+    <div class="btn-group">
+        <button id="portalBtn" class="btn-main">SCHOOL ADMISSION(2027-28)</button>
+        <button id="scholarshipBtn" class="btn-scholarship">स्कॉलरशिप अप्लाई(2027-28)</button>
+    </div>
+
+    <div class="footer-details">
+        <div><span>चेयरमैन:</span> H.S.Royal &nbsp;|&nbsp; <span>डायरेक्टर:</span> R.C.Royal</div>
+        <div style="margin-top: 4px;"><span>हेल्पलाइन:</span> 9772564359, 9887071127</div>
+    </div>
+</div>
+
+<div id="otpModal">
+    <div class="modal-box">
+        <h3>एडमिन सिक्योरिटी</h3>
+        <p>वेरिफिकेशन कोड (OTP) एडमिन की रजिस्टर्ड ईमेल आईडी पर भेज दिया गया है।</p>
+        <input type="text" id="otpInput" class="otp-input" placeholder="------" maxlength="6" autocomplete="off">
+        <button class="btn-verify" onclick="verifyOTP()">सत्यापित करें</button>
+        <div id="errorMessage" class="error-msg">अमान्य OTP! कृपया पुनः प्रयास करें।</div>
+        <button class="cancel-btn" onclick="closeModal()">रद्द करें</button>
+    </div>
+</div>
+
+<script>
+    // --- URLs (Portal & Scholarship) ---
+    
+    // नए पोर्टल लिंक्स
+    const portalStudentUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?hl=en-US";
+    const portalAdminUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?page=admin&hl=en-US";
+    
+    // स्कॉलरशिप लिंक्स
+    const scholarshipStudentUrl = "https://script.google.com/macros/s/AKfycby5h6xjYKOIxBWw8biVkWo5GqvZkkWpUZCat9BQJfzHttSLhKzfx6N5Qh2-9ZSh0Wl68g/exec?hl=en-US";
+    const scholarshipAdminUrl = "https://script.google.com/macros/s/AKfycby5h6xjYKOIxBWw8biVkWo5GqvZkkWpUZCat9BQJfzHttSLhKzfx6N5Qh2-9ZSh0Wl68g/exec?page=admin&hl=en-US";
+    
+    // OTP Sending Script URL
+    const emailScriptUrl = "https://script.google.com/macros/s/AKfycbx9e0egiT8c_hNCAF8pGHAlK1toeo8k_v0mzRk42LJUFg61gsEyA5vTHSMw4h8wZAYk/exec"; 
+
+    // --- State Variables ---
+    let portalClickCount = 0;
+    let portalClickTimeout;
+    
+    let scholarshipClickCount = 0;
+    let scholarshipClickTimeout;
+    
+    let generatedOTP = "";
+    let targetAdminUrl = ""; 
+
+    const portalBtn = document.getElementById('portalBtn');
+    const scholarshipBtn = document.getElementById('scholarshipBtn');
+
+    // --- Portal Button Logic ---
+    portalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        portalClickCount++;
+
+        if (portalClickCount === 1) {
+            portalClickTimeout = setTimeout(() => {
+                if (portalClickCount === 1) {
+                    window.open(portalStudentUrl, "_self");
+                }
+                portalClickCount = 0; 
+            }, 600); 
+        } else if (portalClickCount === 3) {
+            clearTimeout(portalClickTimeout);
+            portalClickCount = 0;
+            targetAdminUrl = portalAdminUrl; 
+            triggerAdminProcess();
+        }
+    });
+
+    // --- Scholarship Button Logic ---
+    scholarshipBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scholarshipClickCount++;
+
+        if (scholarshipClickCount === 1) {
+            scholarshipClickTimeout = setTimeout(() => {
+                if (scholarshipClickCount === 1) {
+                    window.open(scholarshipStudentUrl, "_self");
+                }
+                scholarshipClickCount = 0; 
+            }, 600); 
+        } else if (scholarshipClickCount === 3) {
+            clearTimeout(scholarshipClickTimeout);
+            scholarshipClickCount = 0;
+            targetAdminUrl = scholarshipAdminUrl; 
+            triggerAdminProcess();
+        }
+    });
+
+    // --- OTP Logic ---
+    function triggerAdminProcess() {
+        generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        
+        document.getElementById('otpModal').style.display = 'flex';
+        document.getElementById('otpInput').value = '';
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('otpInput').focus();
+
+        fetch(emailScriptUrl + "?action=sendOTP&otp=" + generatedOTP, { mode: 'no-cors' })
+        .catch(err => console.error("Error:", err));
+    }
+
+    function verifyOTP() {
+        const userInput = document.getElementById('otpInput').value;
+        if (userInput === generatedOTP && generatedOTP !== "") {
+            window.open(targetAdminUrl, "_self"); 
+            closeModal();
+        } else {
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('otpModal').style.display = 'none';
+        generatedOTP = "";
+        targetAdminUrl = "";
+    }
+</script>
+
+</body>
+</html>
