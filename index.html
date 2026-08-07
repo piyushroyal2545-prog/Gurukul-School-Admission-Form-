@@ -60,14 +60,14 @@
         .btn-main, .btn-scholarship {
             width: 100%;
             padding: 16px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: #ffffff;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         .btn-main {
             background: linear-gradient(to right, #2563eb, #1d4ed8);
@@ -193,7 +193,8 @@
 
 <div class="container">
     <div class="logo-container">
-        <img src="https://i.ibb.co/rKh8kdsd/In-Shot-20260723-202840730.png" alt="Gurukul Logo" class="logo">
+        <!-- यहाँ लोगो की इमेज का नाम दिया गया है, जो GitHub पर अपलोड होनी चाहिए -->
+        <img src="logo.png" alt="Gurukul Logo" class="logo">
     </div>
     <h1>गुरुकुल सीनियर सेकेंडरी स्कूल</h1>
     <p class="subtitle">भाड़ासर रोड, धनकोली</p>
@@ -221,8 +222,6 @@
 </div>
 
 <script>
-    // --- URLs (Portal & Scholarship) ---
-    
     // नए पोर्टल लिंक्स
     const portalStudentUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?hl=en-US";
     const portalAdminUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?page=admin&hl=en-US";
@@ -234,7 +233,7 @@
     // OTP Sending Script URL
     const emailScriptUrl = "https://script.google.com/macros/s/AKfycbx9e0egiT8c_hNCAF8pGHAlK1toeo8k_v0mzRk42LJUFg61gsEyA5vTHSMw4h8wZAYk/exec"; 
 
-    // --- State Variables ---
+    // State Variables
     let portalClickCount = 0;
     let portalClickTimeout;
     
@@ -247,7 +246,7 @@
     const portalBtn = document.getElementById('portalBtn');
     const scholarshipBtn = document.getElementById('scholarshipBtn');
 
-    // --- Portal Button Logic ---
+    // Portal Button Logic
     portalBtn.addEventListener('click', (e) => {
         e.preventDefault();
         portalClickCount++;
@@ -267,7 +266,7 @@
         }
     });
 
-    // --- Scholarship Button Logic ---
+    // Scholarship Button Logic
     scholarshipBtn.addEventListener('click', (e) => {
         e.preventDefault();
         scholarshipClickCount++;
@@ -287,7 +286,7 @@
         }
     });
 
-    // --- OTP Logic ---
+    // OTP Logic
     function triggerAdminProcess() {
         generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
         
