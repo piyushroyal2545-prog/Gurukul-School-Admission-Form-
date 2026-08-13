@@ -1,302 +1,354 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> - गुरुकुल सीनियर सेकेंडरी स्कूल</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>छात्र पोर्टल - गुरुकुल सीनियर सेकेंडरी स्कूल</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Dynamic Theme Variables */
+    :root { 
+      --primary: #B85324; 
+      --bg: linear-gradient(135deg, #fff0e6 0%, #ffffff 50%, #e6ffe6 100%);
+      --bg-size: cover;
+      --card-bg: rgba(255, 255, 255, 0.95); 
+      --text: #2d3748; 
+      --btn-bg: #B85324;
+      --popup-bg: #ffffff;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { 
+        background: var(--bg); 
+        background-size: var(--bg-size); 
+        background-attachment: fixed; 
+        color: var(--text); 
+        display: flex; 
+        flex-direction: column; 
+        min-height: 100vh; 
+        transition: all 0.5s ease; 
+    }
+    
+    /* Header */
+    .header { 
+        background: var(--popup-bg); 
+        padding: 15px 20px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 3px solid var(--primary); 
+        transition: all 0.5s ease; 
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .header-logo { display: flex; align-items: center; gap: 15px; }
+    .header-logo img { height: 50px; }
+    .school-info h1 { font-size: 18px; color: var(--primary); }
+    .school-info p { font-size: 12px; color: var(--text); opacity: 0.8; font-weight: bold; }
+    
+    /* Theme Selector Dropdown */
+    .theme-selector {
+        background: rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.1);
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: var(--text);
+        font-weight: bold;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .theme-selector:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
 
-        /* Bright Animated Mesh Gradient Background */
-        body {
-            background-color: #ffffff;
-            background-image: 
-                radial-gradient(at 40% 20%, hsla(228,100%,74%,1) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%),
-                radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%),
-                radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%),
-                radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            color: #1e293b;
-            background-size: cover;
-            background-attachment: fixed;
-        }
+    #app { flex: 1; padding: 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
+    
+    /* Greeting Banner */
+    .greeting-banner {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .greeting-banner h2 {
+        font-size: 28px;
+        color: var(--primary);
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    }
+    .greeting-banner p {
+        font-size: 14px;
+        opacity: 0.9;
+        font-weight: 600;
+        background: rgba(255,255,255,0.5);
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 15px;
+    }
 
-        .main-wrapper {
-            width: 100%;
-            max-width: 950px;
-        }
+    /* Grid System for Student Portals */
+    .portal-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 25px; 
+    }
+    
+    /* Glass Cards */
+    .glass-card { 
+        background: var(--card-bg); 
+        padding: 25px; 
+        border-radius: 15px; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        backdrop-filter: blur(10px); 
+        border: 1px solid rgba(255,255,255,0.2); 
+        transition: all 0.4s ease; 
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        border-color: var(--primary);
+    }
 
-        /* Glassmorphism Header Container */
-        .header-glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-            margin-bottom: 40px;
-        }
+    .card-icon {
+        font-size: 40px;
+        color: var(--primary);
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+    }
+    .glass-card:hover .card-icon {
+        transform: scale(1.1);
+    }
 
-        .logo-box {
-            background: #ffffff;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
+    .glass-card h3 {
+        color: var(--text);
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
 
-        .logo {
-            width: 85px;
-            height: auto;
-        }
+    .glass-card p {
+        font-size: 13px;
+        color: var(--text);
+        opacity: 0.8;
+        margin-bottom: 20px;
+        line-height: 1.4;
+        font-weight: 500;
+    }
 
-        h1 {
-            font-size: 34px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+    /* Buttons inside cards */
+    .action-btn { 
+        width: 100%; 
+        padding: 10px 15px; 
+        background: var(--btn-bg); 
+        color: white; 
+        border: none; 
+        font-weight: bold; 
+        cursor: pointer; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        gap: 10px; 
+        border-radius: 8px; 
+        transition: 0.3s; 
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: auto;
+    }
+    .action-btn:hover { 
+        filter: brightness(1.1); 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    }
+    
+    /* Footer */
+    .footer { 
+        text-align: center; 
+        padding: 15px; 
+        background: var(--popup-bg); 
+        font-size: 12px; 
+        color: var(--text); 
+        border-top: 1px solid rgba(0,0,0,0.1); 
+        margin-top: auto; 
+        font-weight: bold; 
+        transition: all 0.5s ease; 
+    }
 
-        .subtitle {
-            font-size: 16px;
-            color: #475569;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.5);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 20px;
-        }
-
-        /* Clean White Cards Grid */
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .student-card {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 30px 25px;
-            text-decoration: none;
-            color: #1e293b;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
-            border: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .student-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Color Themes for Cards */
-        .card-admission:hover { border-color: #3b82f6; }
-        .card-admission .icon-bg { background: #eff6ff; color: #3b82f6; }
-        
-        .card-scholarship:hover { border-color: #10b981; }
-        .card-scholarship .icon-bg { background: #ecfdf5; color: #10b981; }
-        
-        .card-result:hover { border-color: #8b5cf6; }
-        .card-result .icon-bg { background: #f5f3ff; color: #8b5cf6; }
-        
-        .card-fees:hover { border-color: #f59e0b; }
-        .card-fees .icon-bg { background: #fffbeb; color: #f59e0b; }
-        
-        .card-exam:hover { border-color: #ef4444; }
-        .card-exam .icon-bg { background: #fef2f2; color: #ef4444; }
-
-        .icon-bg {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .student-card:hover .icon-bg {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .card-desc {
-            font-size: 14px;
-            color: #64748b;
-            line-height: 1.5;
-        }
-
-        /* Action Arrow */
-        .action-arrow {
-            margin-top: 15px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 18px;
-            transition: all 0.3s;
-        }
-
-        .student-card:hover .action-arrow {
-            background: #1e293b;
-            color: #ffffff;
-            transform: translateX(5px);
-        }
-
-        /* Footer */
-        .footer-glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-        }
-
-        .footer-info {
-            font-size: 14px;
-            color: #475569;
-        }
-
-        .footer-info span {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 28px; }
-            .header-glass { padding: 30px 20px; }
-            .student-grid { grid-template-columns: 1fr; }
-            .footer-glass { flex-direction: column; }
-        }
-    </style>
+    @media (max-width: 600px) {
+        .header { flex-direction: column; text-align: center; justify-content: center; }
+        .theme-selector { width: 100%; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="main-wrapper">
+  <!-- Header with Theme Selector -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="School Logo">
+      <div class="school-info">
+        <h1>Gurukul Senior Secondary School</h1>
+        <p>Bhadasar Road, Dhankoli</p>
+      </div>
+    </div>
     
-    <div class="header-glass">
-        <div class="logo-box">
-            <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="Gurukul Logo" class="logo">
-        </div>
-        <h1 id="greetingText">Students</h1>
-        <div class="subtitle">गुरुकुल सीनियर सेकेंडरी स्कूल, धनकोली</div>
+    <!-- Theme Selector Dropdown -->
+    <select id="themeSelect" class="theme-selector" onchange="changeTheme()">
+        <option value="default">🟢 डिफ़ॉल्ट थीम</option>
+        <option value="diwali">🪔 दिवाली थीम (डार्क)</option>
+        <option value="holi">🎨 होली थीम (कलरफुल)</option>
+        <option value="sankranti">🪁 संक्रांति (आसमानी)</option>
+    </select>
+  </div>
+
+  <div id="app">
+    
+    <!-- Dynamic Greeting Section -->
+    <div class="greeting-banner">
+        <h2 id="greetingText">छात्र पोर्टल</h2>
+        <p>अपनी सुविधानुसार नीचे दिए गए पोर्टल्स का उपयोग करें</p>
     </div>
 
-    <div class="student-grid">
-        
-        <!-- 1. Admission (Student Link) -->
-        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="student-card card-admission">
-            <div class="icon-bg">🎓</div>
-            <div class="card-title">स्कूल एडमिशन</div>
-            <div class="card-desc">नए सत्र के लिए अपना एडमिशन फॉर्म भरें।</div>
-            <div class="action-arrow">→</div>
+    <!-- Student Portals Grid -->
+    <div class="portal-grid">
+      
+      <!-- 1. Homework Portal -->
+      <div class="glass-card">
+        <i class="fas fa-book-reader card-icon"></i>
+        <h3>होमवर्क पोर्टल</h3>
+        <p>अपना दैनिक होमवर्क और असाइनमेंट देखें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
 
-        <!-- 2. Scholarship (Student Link) -->
-        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="student-card card-scholarship">
-            <div class="icon-bg">📜</div>
-            <div class="card-title">स्कॉलरशिप फॉर्म</div>
-            <div class="card-desc">छात्रवृत्ति योजना के लिए ऑनलाइन आवेदन करें।</div>
-            <div class="action-arrow">→</div>
+      <!-- 2. Admission Form -->
+      <div class="glass-card">
+        <i class="fas fa-user-graduate card-icon"></i>
+        <h3>स्कूल एडमिशन</h3>
+        <p>नए सत्र के लिए अपना एडमिशन फॉर्म भरें (नॉन स्कॉलरशिप)।</p>
+        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
 
-        <!-- 3. Result (Student Link) -->
-        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="student-card card-result">
-            <div class="icon-bg">📊</div>
-            <div class="card-title"> स्कॉलरशिप एग्जाम रिजल्ट 2027 </div>
-            <div class="card-desc">अपना परीक्षा परिणाम और मार्कशीट यहाँ देखें।</div>
-            <div class="action-arrow">→</div>
+      <!-- 3. Scholarship Portal -->
+      <div class="glass-card">
+        <i class="fas fa-award card-icon"></i>
+        <h3>स्कॉलरशिप फॉर्म</h3>
+        <p>छात्रवृत्ति योजना के लिए ऑनलाइन आवेदन करें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
 
-        <!-- 4. Fees (Student Link) -->
-        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="student-card card-fees">
-            <div class="icon-bg">💰</div>
-            <div class="card-title">फीस पोर्टल</div>
-            <div class="card-desc">अपनी फीस की चेक करें और रसीद डाउनलोड करें।</div>
-            <div class="action-arrow">→</div>
+      <!-- 4. Result Portal -->
+      <div class="glass-card">
+        <i class="fas fa-chart-bar card-icon"></i>
+        <h3>परीक्षा परिणाम</h3>
+        <p>अपना स्कॉलरशिप परीक्षा परिणाम और मार्कशीट यहाँ देखें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
 
-        <!-- 5. Exam (Student Link) -->
-        <a href="https://share.google/oN3qzKU8uKLLtPw83" class="student-card card-exam">
-            <div class="icon-bg">📝</div>
-            <div class="card-title"> क्लास टेस्ट और स्कूल एग्जाम</div>
-            <div class="card-desc">अर्धवार्षिक परीक्षा का पोर्टल एक्सेस करें।</div>
-            <div class="action-arrow">→</div>
+      <!-- 5. Fees Portal -->
+      <div class="glass-card">
+        <i class="fas fa-rupee-sign card-icon"></i>
+        <h3>फीस पोर्टल</h3>
+        <p>अपनी फीस की स्थिति चेक और डाउनलोड करें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
+
+      <!-- 6. Exam Portal -->
+      <div class="glass-card">
+        <i class="fas fa-file-alt card-icon"></i>
+        <h3>हाफ ईयरली एग्जाम</h3>
+        <p>क्लास टेस्ट और परीक्षा का पोर्टल एक्सेस करें।</p>
+        <a href="https://share.google/oN3qzKU8uKLLtPw83" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
 
     </div>
+  </div>
 
-    <div class="footer-glass">
-        <div class="footer-info">चेयरमैन: <span>H.S.Royal</span></div>
-        <div class="footer-info">डायरेक्टर: <span>R.C.Royal</span></div>
-        <div class="footer-info">हेल्पलाइन: <span>9772564359, 9887071127</span></div>
-    </div>
+  <!-- Footer -->
+  <div class="footer">
+    Director: R.C.Royal | Chairman: H.S.Royal | Helpline: 9772564359, 9887071127
+  </div>
 
-</div>
+  <script>
+    // 1. Theme Logic Setup
+    const themesData = {
+      'default': { 
+        bg: 'linear-gradient(135deg, #fff0e6 0%, #ffffff 50%, #e6ffe6 100%)', 
+        bgSize: 'cover', primary: '#B85324', btn: '#B85324', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.95)' 
+      },
+      'diwali': { 
+        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2225%22 opacity=%220.15%22>🧨</text><text x=%2250%22 y=%2280%22 font-size=%2225%22 opacity=%220.15%22>✨</text></svg>"), linear-gradient(135deg, #2b0a0a 0%, #000000 100%)', 
+        bgSize: '120px 120px, cover', primary: '#ffd700', btn: '#ff4500', popup: '#3d1414', text: '#ffffff', card: 'rgba(40,10,10,0.9)' 
+      },
+      'holi': { 
+        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2230%22 opacity=%220.25%22>🎨</text><text x=%2250%22 y=%2280%22 font-size=%2230%22 opacity=%220.25%22>🌈</text></svg>"), linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', 
+        bgSize: '150px 150px, cover', primary: '#d6336c', btn: '#9c27b0', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.9)' 
+      },
+      'sankranti': { 
+        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2230%22 opacity=%220.25%22>🪁</text><text x=%2250%22 y=%2280%22 font-size=%2220%22 opacity=%220.25%22>☁️</text></svg>"), linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)', 
+        bgSize: '150px 150px, cover', primary: '#0052d4', btn: '#ff7e5f', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.95)' 
+      }
+    };
 
-<script>
-    // समय के अनुसार ग्रीटिंग मैसेज और नाईट अपडेट
+    function applyThemeToUI(themeName) {
+      let t = themesData[themeName] || themesData['default'];
+      document.documentElement.style.setProperty('--bg', t.bg);
+      document.documentElement.style.setProperty('--bg-size', t.bgSize);
+      document.documentElement.style.setProperty('--primary', t.primary);
+      document.documentElement.style.setProperty('--btn-bg', t.btn);
+      document.documentElement.style.setProperty('--popup-bg', t.popup);
+      document.documentElement.style.setProperty('--text', t.text);
+      document.documentElement.style.setProperty('--card-bg', t.card);
+    }
+
+    function changeTheme() {
+      let selectedTheme = document.getElementById("themeSelect").value;
+      applyThemeToUI(selectedTheme);
+      // थीम की चॉइस को ब्राउज़र में सेव कर रहे हैं, ताकि पेज रीलोड पर भी थीम बनी रहे
+      localStorage.setItem("student_portal_theme", selectedTheme);
+    }
+
+    // 2. Load Saved Theme on Startup
+    window.onload = () => {
+        let savedTheme = localStorage.getItem("student_portal_theme");
+        if(savedTheme) {
+            document.getElementById("themeSelect").value = savedTheme;
+            applyThemeToUI(savedTheme);
+        }
+    };
+
+    // 3. Greeting Message Logic
     const hour = new Date().getHours();
     const greetingElement = document.getElementById('greetingText');
     
     if (hour >= 5 && hour < 12) {
-        greetingElement.innerText = "GOOD MORNING! Students";
+        greetingElement.innerHTML = "<i class='fas fa-sun'></i> GOOD MORNING! HAVE A GREAT DAY";
     } else if (hour >= 12 && hour < 17) {
-        greetingElement.innerText = "GOOD AFTERNOON! Students";
+        greetingElement.innerHTML = "<i class='fas fa-cloud-sun'></i> GOOD AFTERNOON! STUDENTS";
     } else if (hour >= 17 && hour < 21) {
-        greetingElement.innerText = "GOOD EVENING! STUDENTS";
+        greetingElement.innerHTML = "<i class='fas fa-moon'></i> GOOD EVENING! STUDENTS";
     } else {
-        greetingElement.innerText = "GOOD NIGHT 😴! STUDENTS";
+        greetingElement.innerHTML = "<i class='fas fa-star'></i> GOOD NIGHT! STUDENTS";
     }
-</script>
-
+  </script>
 </body>
 </html>
