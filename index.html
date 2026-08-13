@@ -3,315 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>गुरुकुल सीनियर सेकेंडरी स्कूल - मुख्य पोर्टल</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>छात्र पोर्टल - गुरुकुल सीनियर सेकेंडरी स्कूल</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-        body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+        }
+
+        /* Bright Animated Mesh Gradient Background */
+        body {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(at 40% 20%, hsla(228,100%,74%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            color: #333;
+            padding: 40px 20px;
+            color: #1e293b;
+            background-size: cover;
+            background-attachment: fixed;
         }
-        .container {
-            background: #ffffff;
-            padding: 45px 40px;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            width: 90%;
-            max-width: 420px;
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 950px;
+        }
+
+        /* Glassmorphism Header Container */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 40px 30px;
             text-align: center;
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
         }
-        .logo-container {
-            margin-bottom: 20px;
-        }
-        .logo {
+
+        .logo-box {
+            background: #ffffff;
             width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .logo {
+            width: 85px;
             height: auto;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
+
         h1 {
-            font-size: 22px;
-            color: #0a192f;
+            font-size: 34px;
             font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
+            color: #0f172a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
-        p.subtitle {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 35px;
+
+        .subtitle {
+            font-size: 16px;
+            color: #475569;
             font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
         }
-        .btn-group {
+
+        /* Clean White Cards Grid */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .student-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px 25px;
+            text-decoration: none;
+            color: #1e293b;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        .btn-main, .btn-scholarship {
-            width: 100%;
-            padding: 16px;
-            font-size: 15px;
+
+        .student-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Color Themes for Cards */
+        .card-admission:hover { border-color: #3b82f6; }
+        .card-admission .icon-bg { background: #eff6ff; color: #3b82f6; }
+        
+        .card-scholarship:hover { border-color: #10b981; }
+        .card-scholarship .icon-bg { background: #ecfdf5; color: #10b981; }
+        
+        .card-result:hover { border-color: #8b5cf6; }
+        .card-result .icon-bg { background: #f5f3ff; color: #8b5cf6; }
+        
+        .card-fees:hover { border-color: #f59e0b; }
+        .card-fees .icon-bg { background: #fffbeb; color: #f59e0b; }
+        
+        .card-exam:hover { border-color: #ef4444; }
+        .card-exam .icon-bg { background: #fef2f2; color: #ef4444; }
+
+        .icon-bg {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .student-card:hover .icon-bg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-title {
+            font-size: 20px;
             font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* Action Arrow */
+        .action-arrow {
+            margin-top: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .student-card:hover .action-arrow {
+            background: #1e293b;
             color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            transform: translateX(5px);
         }
-        .btn-main {
-            background: linear-gradient(to right, #2563eb, #1d4ed8);
-            box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+
+        /* Footer */
+        .footer-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
         }
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4);
-            background: linear-gradient(to right, #1d4ed8, #1e40af);
-        }
-        .btn-scholarship {
-            background: linear-gradient(to right, #10b981, #059669);
-            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
-        }
-        .btn-scholarship:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px rgba(16, 185, 129, 0.4);
-            background: linear-gradient(to right, #059669, #047857);
-        }
-        .btn-main:active, .btn-scholarship:active {
-            transform: translateY(1px);
-        }
-        .footer-details {
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            font-size: 13px;
+
+        .footer-info {
+            font-size: 14px;
             color: #475569;
-            line-height: 1.8;
         }
-        .footer-details span {
+
+        .footer-info span {
             color: #0f172a;
             font-weight: 600;
         }
 
-        /* OTP Modal Design */
-        #otpModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-box {
-            background: #ffffff;
-            padding: 35px 30px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 360px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .modal-box h3 {
-            color: #0a192f;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .modal-box p {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-        .otp-input {
-            width: 100%;
-            padding: 14px;
-            font-size: 22px;
-            text-align: center;
-            letter-spacing: 8px;
-            border: 2px solid #cbd5e1;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            outline: none;
-            font-weight: 700;
-            color: #0f172a;
-            background: #f8fafc;
-            transition: border-color 0.3s;
-        }
-        .otp-input:focus {
-            border-color: #2563eb;
-            background: #ffffff;
-        }
-        .btn-verify {
-            width: 100%;
-            padding: 14px;
-            background: #10b981;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-verify:hover {
-            background: #059669;
-        }
-        .error-msg {
-            color: #ef4444;
-            font-size: 13px;
-            margin-top: 12px;
-            display: none;
-            font-weight: 500;
-        }
-        .cancel-btn {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 14px;
-            margin-top: 20px;
-            cursor: pointer;
-            text-decoration: underline;
-            transition: color 0.3s;
-        }
-        .cancel-btn:hover {
-            color: #475569;
+        @media (max-width: 768px) {
+            h1 { font-size: 28px; }
+            .header-glass { padding: 30px 20px; }
+            .student-grid { grid-template-columns: 1fr; }
+            .footer-glass { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="logo-container">
-        <img src="logo.png" alt="Gurukul Logo" class="logo">
-    </div>
-    <h1>गुरुकुल सीनियर सेकेंडरी स्कूल</h1>
-    <p class="subtitle">भाड़ासर रोड, धनकोली</p>
+<div class="main-wrapper">
     
-    <div class="btn-group">
-        <button id="portalBtn" class="btn-main">SCHOOL ADMISSION(2027-28)</button>
-        <button id="scholarshipBtn" class="btn-scholarship">स्कॉलरशिप अप्लाई(2027-28)</button>
+    <div class="header-glass">
+        <div class="logo-box">
+            <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="Gurukul Logo" class="logo">
+        </div>
+        <h1 id="greetingText">छात्र पोर्टल</h1>
+        <div class="subtitle">गुरुकुल सीनियर सेकेंडरी स्कूल, धनकोली</div>
     </div>
 
-    <div class="footer-details">
-        <div><span>चेयरमैन:</span> H.S.Royal &nbsp;|&nbsp; <span>डायरेक्टर:</span> R.C.Royal</div>
-        <div style="margin-top: 4px;"><span>हेल्पलाइन:</span> 9772564359, 9887071127</div>
-    </div>
-</div>
+    <div class="student-grid">
+        
+        <!-- 1. Admission (Student Link) -->
+        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="student-card card-admission">
+            <div class="icon-bg">🎓</div>
+            <div class="card-title">स्कूल एडमिशन</div>
+            <div class="card-desc">नए सत्र के लिए अपना एडमिशन फॉर्म भरें।</div>
+            <div class="action-arrow">→</div>
+        </a>
 
-<div id="otpModal">
-    <div class="modal-box">
-        <h3>एडमिन सिक्योरिटी</h3>
-        <p>वेरिफिकेशन कोड (OTP) एडमिन की रजिस्टर्ड ईमेल आईडी पर भेज दिया गया है।</p>
-        <input type="text" id="otpInput" class="otp-input" placeholder="------" maxlength="6" autocomplete="off">
-        <button class="btn-verify" onclick="verifyOTP()">सत्यापित करें</button>
-        <div id="errorMessage" class="error-msg">अमान्य OTP! कृपया पुनः प्रयास करें।</div>
-        <button class="cancel-btn" onclick="closeModal()">रद्द करें</button>
+        <!-- 2. Scholarship (Student Link) -->
+        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="student-card card-scholarship">
+            <div class="icon-bg">📜</div>
+            <div class="card-title">स्कॉलरशिप फॉर्म</div>
+            <div class="card-desc">छात्रवृत्ति योजना के लिए ऑनलाइन आवेदन करें।</div>
+            <div class="action-arrow">→</div>
+        </a>
+
+        <!-- 3. Result (Student Link) -->
+        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="student-card card-result">
+            <div class="icon-bg">📊</div>
+            <div class="card-title">परीक्षा परिणाम</div>
+            <div class="card-desc">अपना परीक्षा परिणाम और मार्कशीट यहाँ देखें।</div>
+            <div class="action-arrow">→</div>
+        </a>
+
+        <!-- 4. Fees (Student Link) -->
+        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="student-card card-fees">
+            <div class="icon-bg">💰</div>
+            <div class="card-title">फीस पोर्टल</div>
+            <div class="card-desc">अपनी फीस जमा करें और रसीद डाउनलोड करें।</div>
+            <div class="action-arrow">→</div>
+        </a>
+
+        <!-- 5. Exam (Student Link) -->
+        <a href="https://share.google/oN3qzKU8uKLLtPw83" class="student-card card-exam">
+            <div class="icon-bg">📝</div>
+            <div class="card-title">हाफ ईयरली एग्जाम</div>
+            <div class="card-desc">अर्धवार्षिक परीक्षा का पोर्टल एक्सेस करें।</div>
+            <div class="action-arrow">→</div>
+        </a>
+
     </div>
+
+    <div class="footer-glass">
+        <div class="footer-info">चेयरमैन: <span>H.S.Royal</span></div>
+        <div class="footer-info">डायरेक्टर: <span>R.C.Royal</span></div>
+        <div class="footer-info">हेल्पलाइन: <span>9772564359, 9887071127</span></div>
+    </div>
+
 </div>
 
 <script>
-    // पोर्टल लिंक्स
-    const portalStudentUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?hl=en-US";
-    const portalAdminUrl = "https://script.google.com/macros/s/AKfycbyUbhLPPY4yX00ZdPbfj9lCLixOWKMm5gy4IlOiM4attZEd-4Plbtzf0b44qzPo9UOX/exec?page=admin&hl=en-US";
+    // समय के अनुसार ग्रीटिंग मैसेज और नाईट अपडेट
+    const hour = new Date().getHours();
+    const greetingElement = document.getElementById('greetingText');
     
-    // स्कॉलरशिप लिंक्स
-    const scholarshipStudentUrl = "https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US";
-    const scholarshipAdminUrl = "https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?page=admin&hl=en-US";
-    
-    // नया अपडेटेड OTP Sending Script URL
-    const emailScriptUrl = "https://script.google.com/macros/s/AKfycbz6RycF0JjpC0c9aQek0PINN2wLxLSblagnhd04B7pwr47oi0silPE2Di_A_vjoFRD8dA/exec"; 
-
-    // State Variables
-    let portalClickCount = 0;
-    let portalClickTimeout;
-    
-    let scholarshipClickCount = 0;
-    let scholarshipClickTimeout;
-    
-    let generatedOTP = "";
-    let targetAdminUrl = ""; 
-
-    const portalBtn = document.getElementById('portalBtn');
-    const scholarshipBtn = document.getElementById('scholarshipBtn');
-
-    // Portal Button Logic
-    portalBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        portalClickCount++;
-
-        if (portalClickCount === 1) {
-            portalClickTimeout = setTimeout(() => {
-                if (portalClickCount === 1) {
-                    window.open(portalStudentUrl, "_self");
-                }
-                portalClickCount = 0; 
-            }, 600); 
-        } else if (portalClickCount === 3) {
-            clearTimeout(portalClickTimeout);
-            portalClickCount = 0;
-            targetAdminUrl = portalAdminUrl; 
-            triggerAdminProcess();
-        }
-    });
-
-    // Scholarship Button Logic
-    scholarshipBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        scholarshipClickCount++;
-
-        if (scholarshipClickCount === 1) {
-            scholarshipClickTimeout = setTimeout(() => {
-                if (scholarshipClickCount === 1) {
-                    window.open(scholarshipStudentUrl, "_self");
-                }
-                scholarshipClickCount = 0; 
-            }, 600); 
-        } else if (scholarshipClickCount === 3) {
-            clearTimeout(scholarshipClickTimeout);
-            scholarshipClickCount = 0;
-            targetAdminUrl = scholarshipAdminUrl; 
-            triggerAdminProcess();
-        }
-    });
-
-    // OTP Logic
-    function triggerAdminProcess() {
-        generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-        
-        document.getElementById('otpModal').style.display = 'flex';
-        document.getElementById('otpInput').value = '';
-        document.getElementById('errorMessage').style.display = 'none';
-        document.getElementById('otpInput').focus();
-
-        fetch(emailScriptUrl + "?action=sendOTP&otp=" + generatedOTP, { mode: 'no-cors' })
-        .catch(err => console.error("Error:", err));
-    }
-
-    function verifyOTP() {
-        const userInput = document.getElementById('otpInput').value;
-        if (userInput === generatedOTP && generatedOTP !== "") {
-            window.open(targetAdminUrl, "_self"); 
-            closeModal();
-        } else {
-            document.getElementById('errorMessage').style.display = 'block';
-        }
-    }
-
-    function closeModal() {
-        document.getElementById('otpModal').style.display = 'none';
-        generatedOTP = "";
-        targetAdminUrl = "";
+    if (hour >= 5 && hour < 12) {
+        greetingElement.innerText = "सुप्रभात! छात्र पोर्टल";
+    } else if (hour >= 12 && hour < 17) {
+        greetingElement.innerText = "शुभ दोपहर! छात्र पोर्टल";
+    } else if (hour >= 17 && hour < 21) {
+        greetingElement.innerText = "शुभ संध्या! छात्र पोर्टल";
+    } else {
+        greetingElement.innerText = "शुभ रात्रि! छात्र पोर्टल";
     }
 </script>
 
