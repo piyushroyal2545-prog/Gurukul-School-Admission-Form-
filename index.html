@@ -168,6 +168,7 @@
         filter: brightness(1.1); 
         box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
     }
+    .disabled-card { opacity: 0.6; cursor: not-allowed; }
     
     /* Footer */
     .footer { 
@@ -214,23 +215,13 @@
     <!-- Dynamic Greeting Section -->
     <div class="greeting-banner">
         <h2 id="greetingText">छात्र पोर्टल</h2>
-        <p>अपनी सुविधानुसार नीचे दिए गए पोर्टल्स का उपयोग करें</p>
+        <p> अपनी सुविधा अनुसार चयन करें ( कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करे )</p>
     </div>
 
     <!-- Student Portals Grid -->
     <div class="portal-grid">
       
-      <!-- 1. Homework Portal -->
-      <div class="glass-card">
-        <i class="fas fa-book-reader card-icon"></i>
-        <h3>होमवर्क पोर्टल</h3>
-        <p>अपना दैनिक होमवर्क और असाइनमेंट देखें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 2. Admission Form -->
+        <!-- 1. Admission Form -->
       <div class="glass-card">
         <i class="fas fa-user-graduate card-icon"></i>
         <h3>स्कूल एडमिशन</h3>
@@ -240,7 +231,7 @@
         </a>
       </div>
 
-      <!-- 3. Scholarship Portal -->
+      <!-- 2. Scholarship Portal -->
       <div class="glass-card">
         <i class="fas fa-award card-icon"></i>
         <h3>स्कॉलरशिप फॉर्म</h3>
@@ -250,17 +241,57 @@
         </a>
       </div>
 
-      <!-- 4. Result Portal -->
+      <!-- 3. Result Portal -->
       <div class="glass-card">
         <i class="fas fa-chart-bar card-icon"></i>
-        <h3>परीक्षा परिणाम</h3>
+        <h3> स्कॉलरशिप परीक्षा परिणाम</h3>
         <p>अपना स्कॉलरशिप परीक्षा परिणाम और मार्कशीट यहाँ देखें।</p>
         <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="action-btn">
             यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
         </a>
       </div>
+      
+       <!-- 5. Annual Report Portal -->
+      <div class="glass-card">
+        <i class="fas fa-id-badge card-icon"></i>
+        <h3>एनुअल रिपोर्ट</h3>
+        <p>अपना वार्षिक परिणाम (Annual Report) यहाँ देखें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
 
-      <!-- 5. Fees Portal -->
+        <!-- 6. Daily Test (School Exam Data) -->
+        <div class="glass-card">
+            <i class="fas fa-tasks card-icon"></i>
+            <h3>डेली टेस्ट</h3>
+            <p>विद्यार्थी अपनी डेली टेस्ट रिपोर्ट चेक करें</p>
+            <a href="https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec" class="action-btn">
+                यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+      <!-- 7. Exam Portal -->
+      <div class="glass-card">
+        <i class="fas fa-file-alt card-icon"></i>
+        <h3>हाफ ईयरली एग्जाम</h3>
+        <p> Half yearly परीक्षा का पोर्टल एक्सेस करें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbxv6S_OHsxQG5t3EftnyClpNL_2f4pxjUeEE9RE0JV6a-S9Eitmwe3-Al9kwIGdwLzs4A/exec?=US" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- 8. Homework Portal -->
+      <div class="glass-card">
+        <i class="fas fa-book-reader card-icon"></i>
+        <h3>होमवर्क पोर्टल</h3>
+        <p>अपना दैनिक होमवर्क और असाइनमेंट देखें।</p>
+        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="action-btn">
+            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- 9. Fees Portal -->
       <div class="glass-card">
         <i class="fas fa-rupee-sign card-icon"></i>
         <h3>फीस पोर्टल</h3>
@@ -270,25 +301,55 @@
         </a>
       </div>
 
-      <!-- 6. Exam Portal -->
-      <div class="glass-card">
-        <i class="fas fa-file-alt card-icon"></i>
-        <h3>हाफ ईयरली एग्जाम</h3>
-        <p>क्लास टेस्ट और परीक्षा का पोर्टल एक्सेस करें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 7. Annual Report Portal (नया बटन) -->
-      <div class="glass-card">
-        <i class="fas fa-id-badge card-icon"></i>
-        <h3>एनुअल रिपोर्ट</h3>
-        <p>अपना वार्षिक परिणाम (Annual Report) यहाँ देखें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
+        <!-- 10 to 15 (Future Portals - Coming Soon) -->
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Comming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Coming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Coming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Coming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Coming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
+        <div class="glass-card disabled-card">
+            <i class="fas fa-lock card-icon"></i>
+            <h3>Coming soon</h3>
+            <p>Coming Soon...</p>
+            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
+                Coming Soon
+            </a>
+        </div>
 
     </div>
   </div>
