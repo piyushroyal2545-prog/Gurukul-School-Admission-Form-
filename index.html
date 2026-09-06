@@ -2,424 +2,607 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>छात्र पोर्टल - गुरुकुल सीनियर सेकेंडरी स्कूल</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title> GURUKUL SCHOOL APP </title>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    /* Dynamic Theme Variables */
     :root { 
       --primary: #B85324; 
-      --bg: linear-gradient(135deg, #fff0e6 0%, #ffffff 50%, #e6ffe6 100%);
-      --bg-size: cover;
-      --card-bg: rgba(255, 255, 255, 0.95); 
-      --text: #2d3748; 
-      --btn-bg: #B85324;
-      --popup-bg: #ffffff;
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { 
-        background: var(--bg); 
-        background-size: var(--bg-size); 
-        background-attachment: fixed; 
-        color: var(--text); 
-        display: flex; 
-        flex-direction: column; 
-        min-height: 100vh; 
-        transition: all 0.5s ease; 
-    }
-    
-    /* Header */
-    .header { 
-        background: var(--popup-bg); 
-        padding: 15px 20px; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        position: sticky; 
-        top: 0; 
-        z-index: 100; 
-        border-bottom: 3px solid var(--primary); 
-        transition: all 0.5s ease; 
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    .header-logo { display: flex; align-items: center; gap: 15px; }
-    .header-logo img { height: 50px; }
-    .school-info h1 { font-size: 18px; color: var(--primary); }
-    .school-info p { font-size: 12px; color: var(--text); opacity: 0.8; font-weight: bold; }
-    
-    /* Theme Selector Dropdown */
-    .theme-selector {
-        background: rgba(0,0,0,0.05);
-        border: 1px solid rgba(0,0,0,0.1);
-        padding: 8px 12px;
-        border-radius: 8px;
-        color: var(--text);
-        font-weight: bold;
-        outline: none;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .theme-selector:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      --primary-light: rgba(184, 83, 36, 0.1);
+      --bg: #f4f6f9;
+      --bg-image: none;
+      --card-bg: #ffffff; 
+      --text: #1a1a1a; 
+      --text-muted: #666666;
+      --border: #eeeeee;
+      --nav-bg: #ffffff;
     }
 
-    #app { flex: 1; padding: 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Hind', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #e0e5ec; display: flex; justify-content: center; min-height: 100vh; }
+
+    .app-container {
+        width: 100%; max-width: 480px; background: var(--bg); background-image: var(--bg-image);
+        background-size: cover; background-attachment: fixed; position: relative;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;
+        height: 100vh; overflow: hidden; color: var(--text); transition: all 0.3s ease;
+    }
+
+    .app-header {
+        background: var(--nav-bg); padding: 15px 20px; display: flex; justify-content: space-between;
+        align-items: center; border-bottom: 1px solid var(--border); z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .header-logo-group { display: flex; align-items: center; gap: 12px; }
+    .header-logo-group img { height: 40px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .school-titles h1 { font-size: 16px; color: var(--primary); font-weight: 700; line-height: 1.2; }
+    .school-titles p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
     
-    /* Greeting Banner */
-    .greeting-banner {
-        text-align: center;
-        margin-bottom: 30px;
-        padding: 20px;
+    .notification-bell { font-size: 20px; color: var(--primary); position: relative; cursor: pointer; }
+    .notification-dot { position: absolute; top: 0; right: -2px; width: 8px; height: 8px; background: red; border-radius: 50%; border: 2px solid var(--nav-bg); display: none; }
+
+    .app-body { flex: 1; overflow-y: auto; padding-bottom: 80px; scrollbar-width: none; }
+    .app-body::-webkit-scrollbar { display: none; }
+
+    .greeting-section {
+        padding: 20px; background: var(--primary); color: white; border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px; box-shadow: 0 4px 15px rgba(184, 83, 36, 0.2);
     }
-    .greeting-banner h2 {
-        font-size: 28px;
-        color: var(--primary);
-        margin-bottom: 5px;
-        text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    .greeting-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+    .greeting-section p { font-size: 13px; opacity: 0.9; line-height: 1.5; font-weight: 500; }
+
+    .section-title { font-size: 16px; font-weight: 700; margin: 20px 20px 10px 20px; color: var(--text); }
+
+    .horizontal-scroll { display: flex; gap: 15px; padding: 0 20px 10px 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .horizontal-scroll::-webkit-scrollbar { display: none; }
+    .quick-card {
+        min-width: 130px; background: var(--card-bg); padding: 15px; border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; text-decoration: none;
+        scroll-snap-align: start; border: 1px solid var(--border);
     }
-    .greeting-banner p {
-        font-size: 14px;
-        opacity: 0.9;
-        font-weight: 600;
-        background: rgba(255,255,255,0.5);
-        display: inline-block;
-        padding: 5px 15px;
-        border-radius: 15px;
+    .quick-card i { font-size: 24px; color: var(--primary); margin-bottom: 10px; }
+    .quick-card h4 { font-size: 14px; color: var(--text); font-weight: 600; margin-bottom: 5px; }
+    .quick-card p { font-size: 11px; color: var(--text-muted); font-weight: 500;}
+
+    .portal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px 20px 20px; }
+    .grid-card {
+        background: var(--card-bg); border-radius: 16px; padding: 15px; text-decoration: none;
+        display: flex; flex-direction: column; align-items: flex-start; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        border: 1px solid var(--border); position: relative;
+    }
+    .grid-card .icon-wrapper { width: 40px; height: 40px; background: var(--primary-light); border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; }
+    .grid-card i { font-size: 18px; color: var(--primary); }
+    .grid-card h3 { font-size: 15px; color: var(--text); margin-bottom: 4px; font-weight: 600; }
+    .grid-card p { font-size: 12px; color: var(--text-muted); line-height: 1.3; margin-bottom: 15px; font-weight: 500;}
+    .grid-card .arrow-btn {
+        margin-top: auto; align-self: flex-end; background: var(--primary); color: white;
+        width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px;
     }
 
-    /* Grid System for Student Portals */
-    .portal-grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-        gap: 25px; 
+    .bottom-nav {
+        position: absolute; bottom: 0; width: 100%; background: var(--nav-bg); display: flex;
+        justify-content: space-around; padding: 10px 0 15px 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        border-top: 1px solid var(--border); z-index: 100;
     }
+    .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); gap: 4px; cursor: pointer; }
+    .nav-item.active { color: var(--primary); }
+    .nav-item i { font-size: 20px; }
+    .nav-item span { font-size: 11px; font-weight: 600; }
+
+    .modal-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+        z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { display: block; opacity: 1; }
+    .bottom-sheet {
+        position: absolute; bottom: -100%; left: 0; width: 100%; background: var(--nav-bg);
+        border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; z-index: 1001;
+        transition: bottom 0.3s ease; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); max-height: 85vh; overflow-y: auto;
+    }
+    .bottom-sheet.active { bottom: 0; }
+    .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .sheet-header h3 { font-size: 18px; color: var(--text); font-weight: 700; }
+    .close-sheet { font-size: 22px; color: var(--text-muted); background: none; border: none; cursor: pointer; }
+
+    /* Forms */
+    .input-group { margin-bottom: 15px; text-align: left; }
+    .input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
+    .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; }
+    .input-group input:focus { border-color: var(--primary); }
+    .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 5px; }
+    .btn-outline { width: 100%; background: transparent; color: var(--primary); border: 2px solid var(--primary); padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 15px; }
     
-    /* Glass Cards */
-    .glass-card { 
-        background: var(--card-bg); 
-        padding: 25px; 
-        border-radius: 15px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-        backdrop-filter: blur(10px); 
-        border: 1px solid rgba(255,255,255,0.2); 
-        transition: all 0.4s ease; 
-        text-align: center;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .glass-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        border-color: var(--primary);
-    }
+    /* Notifications & Profile Elements */
+    .noti-item { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; gap: 15px; align-items: flex-start; }
+    .noti-item i { color: var(--primary); font-size: 20px; background: var(--primary-light); padding: 10px; border-radius: 50%; }
+    .noti-content h4 { font-size: 15px; color: var(--text); font-weight: 600; margin-bottom: 3px; }
+    .noti-content p { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-bottom: 5px; line-height: 1.4; }
+    .noti-meta { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; }
+    .noti-meta .date { color: #94a3b8; }
+    .noti-meta .type { color: var(--primary); }
 
-    .card-icon {
-        font-size: 40px;
-        color: var(--primary);
-        margin-bottom: 15px;
-        transition: all 0.3s ease;
-    }
-    .glass-card:hover .card-icon {
-        transform: scale(1.1);
-    }
+    .profile-info { text-align: center; margin-bottom: 20px; }
+    .profile-info i { font-size: 60px; color: var(--primary); margin-bottom: 10px; }
+    .profile-info h3 { font-size: 20px; color: var(--text); font-weight: 700; margin-bottom: 5px;}
+    .profile-info p { font-size: 14px; color: var(--text-muted); font-weight: 500;}
+    .profile-detail-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: left; }
+    .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
+    .detail-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+    .detail-label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+    .detail-value { font-size: 13px; color: var(--text); font-weight: 700; }
 
-    .glass-card h3 {
-        color: var(--text);
-        font-size: 18px;
-        margin-bottom: 8px;
-    }
+    /* Themes & Support */
+    .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .theme-option { padding: 15px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); text-align: center; cursor: pointer; color: var(--text); font-weight: 600; font-size: 14px; }
+    .theme-option.selected { border-color: var(--primary); background: var(--primary-light); }
+    .support-card { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+    .support-icon { width: 40px; height: 40px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 18px; }
+    .support-details h4 { font-size: 15px; margin-bottom: 3px; color: var(--text); font-weight: 600;}
+    .support-details p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .call-btn { margin-left: auto; color: #25D366; font-size: 22px; text-decoration: none; }
 
-    .glass-card p {
-        font-size: 13px;
-        color: var(--text);
-        opacity: 0.8;
-        margin-bottom: 20px;
-        line-height: 1.4;
-        font-weight: 500;
+    /* Custom Professional Alert */
+    .custom-alert-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);
+        z-index: 9999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;
     }
-
-    /* Buttons inside cards */
-    .action-btn { 
-        width: 100%; 
-        padding: 10px 15px; 
-        background: var(--btn-bg); 
-        color: white; 
-        border: none; 
-        font-weight: bold; 
-        cursor: pointer; 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        gap: 10px; 
-        border-radius: 8px; 
-        transition: 0.3s; 
-        text-decoration: none;
-        font-size: 14px;
-        margin-top: auto;
+    .custom-alert-overlay.active { display: flex; opacity: 1; }
+    .custom-alert-box {
+        background: var(--card-bg); width: 85%; max-width: 320px; border-radius: 20px; padding: 25px 20px;
+        text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .action-btn:hover { 
-        filter: brightness(1.1); 
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
-    }
-    .disabled-card { opacity: 0.6; cursor: not-allowed; }
-    
-    /* Footer */
-    .footer { 
-        text-align: center; 
-        padding: 15px; 
-        background: var(--popup-bg); 
-        font-size: 12px; 
-        color: var(--text); 
-        border-top: 1px solid rgba(0,0,0,0.1); 
-        margin-top: auto; 
-        font-weight: bold; 
-        transition: all 0.5s ease; 
-    }
-
-    @media (max-width: 600px) {
-        .header { flex-direction: column; text-align: center; justify-content: center; }
-        .theme-selector { width: 100%; text-align: center; }
-    }
+    .custom-alert-overlay.active .custom-alert-box { transform: scale(1); }
+    .alert-icon { font-size: 50px; margin-bottom: 15px; }
+    .alert-icon.success { color: #28a745; }
+    .alert-icon.error { color: #dc3545; }
+    .alert-icon.warning { color: #ffc107; }
+    .custom-alert-box h3 { font-size: 18px; color: var(--text); margin-bottom: 8px; font-weight: 700; }
+    .custom-alert-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
+    .alert-btn { background: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; }
   </style>
 </head>
 <body>
 
-  <!-- Header with Theme Selector -->
-  <div class="header">
-    <div class="header-logo">
-      <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="School Logo">
-      <div class="school-info">
-        <h1>Gurukul Senior Secondary School</h1>
-        <p>Bhadasar Road, Dhankoli</p>
+  <div class="app-container">
+    
+    <header class="app-header">
+      <div class="header-logo-group">
+        <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="Logo">
+        <div class="school-titles">
+          <h1>Gurukul Sr. Sec. School</h1>
+          <p>Bhadasar Road, Dhankoli</p>
+        </div>
+      </div>
+      <div class="notification-bell" onclick="openNotifications()">
+        <i class="far fa-bell"></i>
+        <div class="notification-dot" id="notiDot"></div>
+      </div>
+    </header>
+
+    <main class="app-body">
+      <div class="greeting-section">
+        <h2 id="greetingText">STUDENT DESHBOARD </h2>
+        <p> कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करें।<br>★ हम आपके उज्जवल भविष्य की कामना करते हैं ★</p>
+      </div>
+
+      <div class="section-title">क्विक एक्सेस</div>
+      <div class="horizontal-scroll">
+        <a href="https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec" class="quick-card">
+          <i class="fas fa-tasks"></i>
+          <h4>Daily Test</h4>
+          <p>CHECK TEST REPORT</p>
+        </a>
+        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="quick-card">
+          <i class="fas fa-book-reader"></i>
+          <h4>HOMEWORK</h4>
+          <p> DAILY HOMEWORK </p>
+        </a>
+        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="quick-card">
+          <i class="fas fa-rupee-sign"></i>
+          <h4>Fees</h4>
+          <p>Check Status</p>
+        </a>
+      </div>
+
+      <div class="section-title">EXAM OR RESULTS</div>
+      <div class="portal-grid">
+        <a href="https://script.google.com/macros/s/AKfycbxv6S_OHsxQG5t3EftnyClpNL_2f4pxjUeEE9RE0JV6a-S9Eitmwe3-Al9kwIGdwLzs4A/exec?=US" class="grid-card">
+          <div class="icon-wrapper"><i class="fas fa-file-alt"></i></div>
+          <h3> HALF YEARLY </h3>
+          <p>अर्धवार्षिक परीक्षा पोर्टल एक्सेस करें</p>
+          <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
+        </a>
+        <a href="https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US" class="grid-card">
+          <div class="icon-wrapper"><i class="fas fa-id-badge"></i></div>
+          <h3> ANNUAL REPORT </h3>
+          <p>अपना वार्षिक परिणाम यहाँ देखें</p>
+          <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
+        </a>
+        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="grid-card">
+          <div class="icon-wrapper"><i class="fas fa-chart-bar"></i></div>
+          <h3>SCHOLARSHIP RESULT<br>( if applicable)</h3>
+          <p>परीक्षा परिणाम और मार्कशीट</p>
+          <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
+        </a>
+      </div>
+
+      <div class="section-title"> ADMISDION OR FORMS </div>
+      <div class="portal-grid">
+        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="grid-card">
+          <div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div>
+          <h3>स्कूल एडमिशन</h3>
+          <p>नए सत्र के लिए फॉर्म भरें</p>
+          <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
+        </a>
+        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="grid-card">
+          <div class="icon-wrapper"><i class="fas fa-award"></i></div>
+          <h3>स्कॉलरशिप फॉर्म</h3>
+          <p>छात्रवृत्ति के लिए आवेदन करें</p>
+          <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
+        </a>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active" onclick="closeAllModals(); setActiveNav(this);">
+        <i class="fas fa-home"></i><span>होम</span>
+      </div>
+      <div class="nav-item" onclick="openModal('themeModal'); setActiveNav(this);">
+        <i class="fas fa-palette"></i><span>थीम</span>
+      </div>
+      <div class="nav-item" onclick="openModal('helpModal'); setActiveNav(this);">
+        <i class="fas fa-headset"></i><span>सपोर्ट</span>
+      </div>
+      <div class="nav-item" onclick="openProfileLogic(); setActiveNav(this);">
+        <i class="fas fa-user-circle"></i><span>प्रोफाइल</span>
+      </div>
+    </nav>
+
+    <!-- Modals Overlay -->
+    <div class="modal-overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Notification Modal -->
+    <div class="bottom-sheet" id="notificationModal">
+      <div class="sheet-header">
+        <h3>नोटिफिकेशन्स</h3>
+        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="notiList">
+        <p style="text-align:center; color:#666; font-size:14px; padding:20px;">नोटिफिकेशन्स लोड हो रहे हैं...</p>
       </div>
     </div>
-    
-    <!-- Theme Selector Dropdown -->
-    <select id="themeSelect" class="theme-selector" onchange="changeTheme()">
-        <option value="default">🟢 डिफ़ॉल्ट थीम</option>
-        <option value="diwali">🪔  (Dark)</option>
-        <option value="holi">🎨  (Colourful)</option>
-        <option value="sankranti">🪁  (Sky-blue)</option>
-    </select>
+
+    <!-- Profile/Login Modal -->
+    <div class="bottom-sheet" id="profileModal">
+      <div class="sheet-header">
+        <h3>विद्यार्थी प्रोफाइल</h3>
+        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div id="profileLoginSection">
+        <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">प्रोफाइल देखने के लिए अपना रोल नंबर दर्ज करें।</p>
+        <div class="input-group">
+          <label>रोल नंबर (Roll Number)</label>
+          <input type="number" id="loginRollNo" placeholder="अपना रोल नंबर दर्ज करें">
+        </div>
+        <button class="btn-main" id="btnLogin" onclick="loginStudent()">लॉगिन करें</button>
+        <button class="btn-outline" onclick="openFindRollModal()">अपना रोल नंबर खोजें (Find Roll No)</button>
+      </div>
+
+      <div id="profileDataSection" style="display: none;">
+        <div class="profile-info">
+          <i class="fas fa-user-graduate"></i>
+          <h3 id="profName">-</h3>
+          <p id="profClassRoll">-</p>
+        </div>
+        <div class="profile-detail-box">
+          <div class="detail-row"><span class="detail-label">पिता का नाम</span><span class="detail-value" id="profFather">-</span></div>
+          <div class="detail-row"><span class="detail-label">कक्षा</span><span class="detail-value" id="profClass">-</span></div>
+          <div class="detail-row"><span class="detail-label">मोबाइल</span><span class="detail-value" id="profMobile">-</span></div>
+        </div>
+        <button class="btn-main" style="background: #dc3545;" onclick="logoutStudent()">लॉगआउट</button>
+      </div>
+    </div>
+
+    <!-- Find Roll Number Modal -->
+    <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
+      <div class="sheet-header">
+        <h3>रोल नंबर खोजें</h3>
+        <button class="close-sheet" onclick="closeFindRollModal()"><i class="fas fa-arrow-left"></i></button>
+      </div>
+      <div class="input-group"><label>विद्यार्थी का नाम</label><input type="text" id="findName"></div>
+      <div class="input-group"><label>पिता का नाम</label><input type="text" id="findFather"></div>
+      <div class="input-group"><label>माता का नाम</label><input type="text" id="findMother"></div>
+      <div class="input-group"><label>जन्म तिथि (DOB)</label><input type="date" id="findDob"></div>
+      <div class="input-group"><label>मोबाइल नंबर</label><input type="number" id="findMobile"></div>
+      <button class="btn-main" id="btnSearchRoll" onclick="searchRollNumber()">खोजें (Search)</button>
+      
+      <div id="rollResult" style="display: none; margin-top: 20px; text-align: center; background: rgba(40,167,69,0.1); padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
+        <p style="font-size: 13px; color: #333;">आपका रोल नंबर है:</p>
+        <h2 id="displayRollNo" style="color: var(--primary); letter-spacing: 2px; margin: 5px 0;"></h2>
+        <button onclick="copyRollNo()" style="background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 5px; font-size:12px; cursor: pointer;"><i class="fas fa-copy"></i> कॉपी करें</button>
+      </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div class="bottom-sheet" id="themeModal">
+      <div class="sheet-header">
+        <h3>SLECT THEME </h3>
+        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="theme-grid">
+        <div class="theme-option" onclick="setTheme('default', this)"> DEFAULT </div>
+        <div class="theme-option" onclick="setTheme('diwali', this)"> DARK </div>
+        <div class="theme-option" onclick="setTheme('holi', this)"> PINK</div>
+        <div class="theme-option" onclick="setTheme('sankranti', this)"> SKYBLUE</div>
+      </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="bottom-sheet" id="helpModal">
+      <div class="sheet-header">
+        <h3>HELPLINE OR SUPPORT</h3>
+        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="support-card">
+        <div class="support-icon"><i class="fas fa-user-tie"></i></div>
+        <div class="support-details"><h4>Director: R.C.Royal</h4><p>GURUKUL SENIOR SECONDARY SCHOOL</p></div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon"><i class="fas fa-user-shield"></i></div>
+        <div class="support-details"><h4>Chairman: H.S.Royal</h4><p> MANAGEMENT CELL </p></div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon"><i class="fas fa-phone-alt"></i></div>
+        <div class="support-details"><h4>HELP LINE NO </h4><p>9772564359, 9887071127</p></div>
+        <a href="tel:9772564359" class="call-btn"><i class="fas fa-phone-square-alt"></i></a>
+      </div>
+    </div>
+
   </div>
 
-  <div id="app">
-    
-    <!-- Dynamic Greeting Section -->
-    <div class="greeting-banner">
-        <h2 id="greetingText">छात्र पोर्टल</h2>
-        <p> अपनी सुविधा अनुसार चयन करें ( कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करे।)        ★हम आपके उज्जवल भविष्य की कामना करते है ★</p>
+  <!-- Custom Alert Overlay -->
+  <div class="custom-alert-overlay" id="customAlertOverlay">
+    <div class="custom-alert-box">
+      <div class="alert-icon" id="alertIcon"></div>
+      <h3 id="alertTitle">Title</h3>
+      <p id="alertMessage">Message</p>
+      <button class="alert-btn" onclick="closeCustomAlert()">ठीक है</button>
     </div>
-
-    <!-- Student Portals Grid -->
-    <div class="portal-grid">
-      
-        <!-- 1. Admission Form -->
-      <div class="glass-card">
-        <i class="fas fa-user-graduate card-icon"></i>
-        <h3>स्कूल एडमिशन</h3>
-        <p>नए सत्र के लिए अपना एडमिशन फॉर्म भरें (नॉन स्कॉलरशिप)।</p>
-        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 2. Scholarship Portal -->
-      <div class="glass-card">
-        <i class="fas fa-award card-icon"></i>
-        <h3>स्कॉलरशिप फॉर्म</h3>
-        <p>छात्रवृत्ति योजना के लिए ऑनलाइन आवेदन करें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 3. Result Portal -->
-      <div class="glass-card">
-        <i class="fas fa-chart-bar card-icon"></i>
-        <h3> स्कॉलरशिप परीक्षा परिणाम</h3>
-        <p>अपना स्कॉलरशिप परीक्षा परिणाम और मार्कशीट यहाँ देखें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-      
-       <!-- 5. Annual Report Portal -->
-      <div class="glass-card">
-        <i class="fas fa-id-badge card-icon"></i>
-        <h3>एनुअल रिपोर्ट</h3>
-        <p>अपना वार्षिक परिणाम (Annual Report) यहाँ देखें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-        <!-- 6. Daily Test (School Exam Data) -->
-        <div class="glass-card">
-            <i class="fas fa-tasks card-icon"></i>
-            <h3>डेली टेस्ट</h3>
-            <p>विद्यार्थी अपनी डेली टेस्ट रिपोर्ट चेक करें</p>
-            <a href="https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec" class="action-btn">
-                यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-
-      <!-- 7. Exam Portal -->
-      <div class="glass-card">
-        <i class="fas fa-file-alt card-icon"></i>
-        <h3>हाफ ईयरली एग्जाम</h3>
-        <p> Half yearly परीक्षा का पोर्टल एक्सेस करें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbxv6S_OHsxQG5t3EftnyClpNL_2f4pxjUeEE9RE0JV6a-S9Eitmwe3-Al9kwIGdwLzs4A/exec?=US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 8. Homework Portal -->
-      <div class="glass-card">
-        <i class="fas fa-book-reader card-icon"></i>
-        <h3>होमवर्क पोर्टल</h3>
-        <p>अपना दैनिक होमवर्क और असाइनमेंट देखें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 9. Fees Portal -->
-      <div class="glass-card">
-        <i class="fas fa-rupee-sign card-icon"></i>
-        <h3>फीस पोर्टल</h3>
-        <p>अपनी फीस की स्थिति चेक और डाउनलोड करें।</p>
-        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="action-btn">
-            यहाँ क्लिक करें <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-        <!-- 10 to 15 (Future Portals - Coming Soon) -->
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Comming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Coming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Coming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Coming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Coming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-        <div class="glass-card disabled-card">
-            <i class="fas fa-lock card-icon"></i>
-            <h3>Coming soon</h3>
-            <p>Coming Soon...</p>
-            <a href="javascript:void(0)" onclick="alert('Coming Soon! (Link not added yet)')" class="action-btn" style="background: grey;">
-                Coming Soon
-            </a>
-        </div>
-
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    Director: R.C.Royal | Chairman: H.S.Royal | Helpline: 9772564359, 9887071127
   </div>
 
   <script>
-    // 1. Theme Logic Setup
-    const themesData = {
-      'default': { 
-        bg: 'linear-gradient(135deg, #fff0e6 0%, #ffffff 50%, #e6ffe6 100%)', 
-        bgSize: 'cover', primary: '#B85324', btn: '#B85324', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.95)' 
-      },
-      'diwali': { 
-        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2225%22 opacity=%220.15%22>🧨</text><text x=%2250%22 y=%2280%22 font-size=%2225%22 opacity=%220.15%22>✨</text></svg>"), linear-gradient(135deg, #2b0a0a 0%, #000000 100%)', 
-        bgSize: '120px 120px, cover', primary: '#ffd700', btn: '#ff4500', popup: '#3d1414', text: '#ffffff', card: 'rgba(40,10,10,0.9)' 
-      },
-      'holi': { 
-        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2230%22 opacity=%220.25%22>🎨</text><text x=%2250%22 y=%2280%22 font-size=%2230%22 opacity=%220.25%22>🌈</text></svg>"), linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', 
-        bgSize: '150px 150px, cover', primary: '#d6336c', btn: '#9c27b0', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.9)' 
-      },
-      'sankranti': { 
-        bg: 'url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%2240%22 font-size=%2230%22 opacity=%220.25%22>🪁</text><text x=%2250%22 y=%2280%22 font-size=%2220%22 opacity=%220.25%22>☁️</text></svg>"), linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)', 
-        bgSize: '150px 150px, cover', primary: '#0052d4', btn: '#ff7e5f', popup: '#ffffff', text: '#2d3748', card: 'rgba(255,255,255,0.95)' 
-      }
-    };
+    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx1WNu69vlJlFCNbY4w6AXhN5_2WNILM84_YCdRyIf4uNIPYpz17DmA6vS5cFYGGUU0/exec";
 
-    function applyThemeToUI(themeName) {
-      let t = themesData[themeName] || themesData['default'];
-      document.documentElement.style.setProperty('--bg', t.bg);
-      document.documentElement.style.setProperty('--bg-size', t.bgSize);
-      document.documentElement.style.setProperty('--primary', t.primary);
-      document.documentElement.style.setProperty('--btn-bg', t.btn);
-      document.documentElement.style.setProperty('--popup-bg', t.popup);
-      document.documentElement.style.setProperty('--text', t.text);
-      document.documentElement.style.setProperty('--card-bg', t.card);
-    }
-
-    function changeTheme() {
-      let selectedTheme = document.getElementById("themeSelect").value;
-      applyThemeToUI(selectedTheme);
-      // थीम की चॉइस को ब्राउज़र में सेव कर रहे हैं, ताकि पेज रीलोड पर भी थीम बनी रहे
-      localStorage.setItem("student_portal_theme", selectedTheme);
-    }
-
-    // 2. Load Saved Theme on Startup
-    window.onload = () => {
-        let savedTheme = localStorage.getItem("student_portal_theme");
-        if(savedTheme) {
-            document.getElementById("themeSelect").value = savedTheme;
-            applyThemeToUI(savedTheme);
+    // --- Custom Alert Logic ---
+    function showCustomAlert(type, title, message) {
+        const overlay = document.getElementById('customAlertOverlay');
+        const iconDiv = document.getElementById('alertIcon');
+        
+        document.getElementById('alertTitle').innerText = title;
+        document.getElementById('alertMessage').innerText = message;
+        
+        if (type === 'success') {
+            iconDiv.className = 'alert-icon success';
+            iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>';
+        } else if (type === 'error') {
+            iconDiv.className = 'alert-icon error';
+            iconDiv.innerHTML = '<i class="fas fa-times-circle"></i>';
+        } else {
+            iconDiv.className = 'alert-icon warning';
+            iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
         }
-    };
+        overlay.classList.add('active');
+    }
 
-    // 3. Greeting Message Logic
+    function closeCustomAlert() {
+        document.getElementById('customAlertOverlay').classList.remove('active');
+    }
+
+    // --- Greeting ---
     const hour = new Date().getHours();
     const greetingElement = document.getElementById('greetingText');
-    
-    if (hour >= 5 && hour < 12) {
-        greetingElement.innerHTML = "<i class='fas fa-sun'></i> GOOD MORNING! HAVE A GREAT DAY";
-    } else if (hour >= 12 && hour < 17) {
-        greetingElement.innerHTML = "<i class='fas fa-cloud-sun'></i> GOOD AFTERNOON! STUDENTS";
-    } else if (hour >= 17 && hour < 21) {
-        greetingElement.innerHTML = "<i class='fas fa-moon'></i> GOOD EVENING! STUDENTS";
-    } else {
-        greetingElement.innerHTML = "<i class='fas fa-star'></i> GOOD NIGHT! STUDENTS";
+    if (hour >= 5 && hour < 12) greetingElement.innerHTML = "<i class='fas fa-sun'></i> सुप्रभात!";
+    else if (hour >= 12 && hour < 17) greetingElement.innerHTML = "<i class='fas fa-cloud-sun'></i> शुभ दोपहर!";
+    else if (hour >= 17 && hour < 21) greetingElement.innerHTML = "<i class='fas fa-moon'></i> शुभ संध्या!";
+    else greetingElement.innerHTML = "<i class='fas fa-star'></i> शुभ रात्रि!";
+
+    // --- Modals & Nav ---
+    function openModal(id) {
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById(id).classList.add('active');
     }
+    function closeAllModals() {
+        document.getElementById('overlay').classList.remove('active');
+        document.querySelectorAll('.bottom-sheet').forEach(sheet => sheet.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+        document.querySelector('.nav-item').classList.add('active'); 
+    }
+    function setActiveNav(element) {
+        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    // --- Notifications ---
+    function openNotifications() {
+        document.getElementById('notiDot').style.display = 'none';
+        openModal('notificationModal');
+    }
+    
+    async function fetchNotifications() {
+        try {
+            const res = await fetch(BACKEND_URL + "?action=getNotifications");
+            const list = await res.json();
+            let html = '';
+            if (list.length === 0) {
+                html = '<p style="text-align:center; padding:20px; color:#666;">कोई नया नोटिफिकेशन नहीं है।</p>';
+            } else {
+                list.forEach(n => {
+                    html += `
+                    <div class="noti-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <div class="noti-content">
+                            <h4>${n.title}</h4><p>${n.message}</p>
+                            <div class="noti-meta"><span class="date">${n.date}</span><span class="type">${n.type}</span></div>
+                        </div>
+                    </div>`;
+                });
+                document.getElementById('notiDot').style.display = 'block';
+            }
+            document.getElementById('notiList').innerHTML = html;
+        } catch (err) {
+            document.getElementById('notiList').innerHTML = '<p style="text-align:center; color:red;">सर्वर से जुड़ने में त्रुटि!</p>';
+        }
+    }
+
+    // --- Profile & Login ---
+    function openProfileLogic() {
+        const savedRoll = localStorage.getItem("gurukul_student_roll");
+        if (savedRoll) {
+            document.getElementById('profileLoginSection').style.display = 'none';
+            document.getElementById('profileDataSection').style.display = 'block';
+            fetchProfileData(savedRoll); 
+        } else {
+            document.getElementById('profileLoginSection').style.display = 'block';
+            document.getElementById('profileDataSection').style.display = 'none';
+        }
+        openModal('profileModal');
+    }
+
+    async function loginStudent() {
+        const roll = document.getElementById('loginRollNo').value;
+        const btn = document.getElementById('btnLogin');
+        if (!roll) { showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया अपना रोल नंबर दर्ज करें!'); return; }
+        
+        btn.innerText = "सत्यापित हो रहा है..."; btn.disabled = true;
+        await fetchProfileData(roll);
+        btn.innerText = "लॉगिन करें"; btn.disabled = false;
+    }
+
+    async function fetchProfileData(rollNo) {
+        try {
+            const res = await fetch(BACKEND_URL + "?action=getProfile&rollno=" + rollNo);
+            const data = await res.json();
+            if (data.status === "success") {
+                localStorage.setItem("gurukul_student_roll", data.rollNo);
+                
+                document.getElementById('profName').innerText = data.name;
+                document.getElementById('profClassRoll').innerText = `कक्षा: ${data.className} | रोल नंबर: ${data.rollNo}`;
+                document.getElementById('profFather').innerText = data.fatherName;
+                document.getElementById('profClass').innerText = data.className;
+                document.getElementById('profMobile').innerText = data.mobile;
+                
+                document.getElementById('profileLoginSection').style.display = 'none';
+                document.getElementById('profileDataSection').style.display = 'block';
+            } else {
+                showCustomAlert('error', 'रिकॉर्ड नहीं मिला', data.message || "दिए गए रोल नंबर का कोई छात्र नहीं मिला।");
+            }
+        } catch (err) { 
+            showCustomAlert('error', 'सर्वर एरर', 'सर्वर से जुड़ने में त्रुटि! कृपया पुनः प्रयास करें।'); 
+        }
+    }
+
+    function logoutStudent() {
+        localStorage.removeItem("gurukul_student_roll");
+        document.getElementById('loginRollNo').value = "";
+        document.getElementById('profileDataSection').style.display = 'none';
+        document.getElementById('profileLoginSection').style.display = 'block';
+    }
+
+    // --- Find Roll Number ---
+    function openFindRollModal() {
+        document.getElementById('profileModal').classList.remove('active');
+        document.getElementById('findRollModal').classList.add('active');
+        document.getElementById('rollResult').style.display = 'none';
+    }
+    function closeFindRollModal() {
+        document.getElementById('findRollModal').classList.remove('active');
+        document.getElementById('profileModal').classList.add('active');
+    }
+
+    async function searchRollNumber() {
+        const n = document.getElementById('findName').value;
+        const f = document.getElementById('findFather').value;
+        const m = document.getElementById('findMother').value;
+        const d = document.getElementById('findDob').value;
+        const mo = document.getElementById('findMobile').value;
+        const btn = document.getElementById('btnSearchRoll');
+
+        if (!n || !f || !m || !d || !mo) { 
+            showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया सभी 5 जानकारियां सही-सही भरें!'); 
+            return; 
+        }
+        btn.innerText = "खोजा जा रहा है..."; btn.disabled = true;
+
+        try {
+            const url = BACKEND_URL + `?action=findRollNo&name=${encodeURIComponent(n)}&father=${encodeURIComponent(f)}&mother=${encodeURIComponent(m)}&dob=${encodeURIComponent(d)}&mobile=${encodeURIComponent(mo)}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (data.status === "success") {
+                document.getElementById('displayRollNo').innerText = data.rollNo;
+                document.getElementById('rollResult').style.display = 'block';
+            } else {
+                showCustomAlert('error', 'रिकॉर्ड नहीं मिला', data.message);
+                document.getElementById('rollResult').style.display = 'none';
+            }
+        } catch (err) { 
+            showCustomAlert('error', 'सर्वर एरर', 'कुछ तकनीकी समस्या है, कृपया पुनः प्रयास करें।'); 
+        }
+        
+        btn.innerText = "खोजें (Search)"; btn.disabled = false;
+    }
+
+    function copyRollNo() {
+        const rollNo = document.getElementById('displayRollNo').innerText;
+        navigator.clipboard.writeText(rollNo).then(() => { 
+            showCustomAlert('success', 'सफल', 'रोल नंबर क्लिपबोर्ड पर कॉपी हो गया है: ' + rollNo); 
+        });
+    }
+
+    // --- Themes ---
+    const themesData = {
+      'default': { bg: '#f4f6f9', bgImage: 'none', primary: '#B85324', primaryLight: 'rgba(184, 83, 36, 0.1)', nav: '#ffffff', card: '#ffffff', text: '#1a1a1a', textMuted: '#666666', border: '#eeeeee' },
+      'diwali': { bg: '#121212', bgImage: 'linear-gradient(135deg, #1f0a0a 0%, #000000 100%)', primary: '#ff9800', primaryLight: 'rgba(255, 152, 0, 0.2)', nav: '#1e1e1e', card: '#242424', text: '#ffffff', textMuted: '#aaaaaa', border: '#333333' },
+      'holi': { bg: '#fff0f5', bgImage: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', primary: '#d6336c', primaryLight: 'rgba(214, 51, 108, 0.15)', nav: '#ffffff', card: 'rgba(255,255,255,0.9)', text: '#1a1a1a', textMuted: '#555555', border: '#ffb3c6' },
+      'sankranti': { bg: '#e0f7fa', bgImage: 'linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)', primary: '#0277bd', primaryLight: 'rgba(2, 119, 189, 0.15)', nav: '#ffffff', card: 'rgba(255,255,255,0.9)', text: '#1a1a1a', textMuted: '#444444', border: '#bbdefb' }
+    };
+
+    function setTheme(themeName, element) {
+      const t = themesData[themeName];
+      document.documentElement.style.setProperty('--bg', t.bg);
+      document.documentElement.style.setProperty('--bg-image', t.bgImage);
+      document.documentElement.style.setProperty('--primary', t.primary);
+      document.documentElement.style.setProperty('--primary-light', t.primaryLight);
+      document.documentElement.style.setProperty('--nav-bg', t.nav);
+      document.documentElement.style.setProperty('--card-bg', t.card);
+      document.documentElement.style.setProperty('--text', t.text);
+      document.documentElement.style.setProperty('--text-muted', t.textMuted);
+      document.documentElement.style.setProperty('--border', t.border);
+      localStorage.setItem("app_theme", themeName);
+      
+      document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
+      if(element) element.classList.add('selected');
+      setTimeout(closeAllModals, 300);
+    }
+
+    // --- On Load ---
+    window.onload = () => {
+        const savedTheme = localStorage.getItem("app_theme") || 'default';
+        const opts = document.querySelectorAll('.theme-option');
+        let tgt = opts[0];
+        if(savedTheme === 'diwali') tgt = opts[1];
+        if(savedTheme === 'holi') tgt = opts[2];
+        if(savedTheme === 'sankranti') tgt = opts[3];
+        setTheme(savedTheme, tgt);
+        
+        fetchNotifications();
+        
+        const roll = localStorage.getItem("gurukul_student_roll");
+        if(roll) fetchProfileData(roll);
+    };
   </script>
 </body>
 </html>
