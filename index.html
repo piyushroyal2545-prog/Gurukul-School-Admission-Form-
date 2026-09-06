@@ -21,14 +21,27 @@
       --nav-bg: #ffffff;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Hind', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: #e0e5ec; display: flex; justify-content: center; min-height: 100vh; }
+    /* Scroll Fix: Locked HTML & Body completely */
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+        background-color: #e0e5ec;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Hind', sans-serif; }
+    
+    body { display: flex; justify-content: center; }
 
     .app-container {
-        width: 100%; max-width: 480px; background: var(--bg); background-image: var(--bg-image);
+        width: 100%; max-width: 480px; height: 100%; 
+        background: var(--bg); background-image: var(--bg-image);
         background-size: cover; background-attachment: fixed; position: relative;
         box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;
-        height: 100vh; overflow: hidden; color: var(--text); transition: all 0.3s ease;
+        overflow: hidden; color: var(--text); transition: all 0.3s ease;
     }
 
     .app-header {
@@ -43,7 +56,15 @@
     .notification-bell { font-size: 20px; color: var(--primary); position: relative; cursor: pointer; }
     .notification-dot { position: absolute; top: 0; right: -2px; width: 8px; height: 8px; background: red; border-radius: 50%; border: 2px solid var(--nav-bg); display: none; }
 
-    .app-body { flex: 1; overflow-y: auto; padding-bottom: 80px; scrollbar-width: none; }
+    /* Scroll Fix: Enabled smooth scrolling strictly for app-body */
+    .app-body { 
+        flex: 1; 
+        overflow-y: auto; 
+        padding-bottom: 110px; 
+        scrollbar-width: none; 
+        -webkit-overflow-scrolling: touch; 
+        overscroll-behavior-y: contain; 
+    }
     .app-body::-webkit-scrollbar { display: none; }
 
     .greeting-section {
@@ -81,10 +102,21 @@
         width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px;
     }
 
+    /* Floating Bottom Nav Fix */
     .bottom-nav {
-        position: absolute; bottom: 0; width: 100%; background: var(--nav-bg); display: flex;
-        justify-content: space-around; padding: 10px 0 15px 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-        border-top: 1px solid var(--border); z-index: 100;
+        position: absolute; 
+        bottom: 20px; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 92%; 
+        background: var(--nav-bg); 
+        display: flex;
+        justify-content: space-around; 
+        padding: 12px 0; 
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border: 1px solid var(--border); 
+        border-radius: 20px; 
+        z-index: 100;
     }
     .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); gap: 4px; cursor: pointer; }
     .nav-item.active { color: var(--primary); }
@@ -98,8 +130,10 @@
     .modal-overlay.active { display: block; opacity: 1; }
     .bottom-sheet {
         position: absolute; bottom: -100%; left: 0; width: 100%; background: var(--nav-bg);
-        border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px; z-index: 1001;
-        transition: bottom 0.3s ease; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); max-height: 85vh; overflow-y: auto;
+        border-top-left-radius: 20px; border-top-right-radius: 20px; 
+        padding: 20px 20px 40px 20px; 
+        z-index: 1001; transition: bottom 0.3s ease; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); 
+        max-height: 85vh; overflow-y: auto;
     }
     .bottom-sheet.active { bottom: 0; }
     .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
@@ -404,10 +438,10 @@
     // --- Greeting ---
     const hour = new Date().getHours();
     const greetingElement = document.getElementById('greetingText');
-    if (hour >= 5 && hour < 12) greetingElement.innerHTML = "<i class='fas fa-sun'></i> सुप्रभात!";
-    else if (hour >= 12 && hour < 17) greetingElement.innerHTML = "<i class='fas fa-cloud-sun'></i> शुभ दोपहर!";
-    else if (hour >= 17 && hour < 21) greetingElement.innerHTML = "<i class='fas fa-moon'></i> शुभ संध्या!";
-    else greetingElement.innerHTML = "<i class='fas fa-star'></i> शुभ रात्रि!";
+    if (hour >= 5 && hour < 12) greetingElement.innerHTML = "<i class='fas fa-sun'></i> GOOD MORNING";
+    else if (hour >= 12 && hour < 17) greetingElement.innerHTML = "<i class='fas fa-cloud-sun'></i> GOOD AFTERNOON!";
+    else if (hour >= 17 && hour < 21) greetingElement.innerHTML = "<i class='fas fa-moon'></i> GOOD EVENING!";
+    else greetingElement.innerHTML = "<i class='fas fa-star'></i> GOOD NIGHT!";
 
     // --- Modals & Nav ---
     function openModal(id) {
