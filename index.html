@@ -10,17 +10,9 @@
   
   <style>
     :root { 
-      --primary: #B85324; 
-      --primary-light: rgba(184, 83, 36, 0.1);
-      --bg: #f4f6f9;
-      --bg-image: none;
-      --card-bg: #ffffff; 
-      --text: #1a1a1a; 
-      --text-muted: #666666;
-      --border: #eeeeee;
-      --nav-bg: #ffffff;
+      --primary: #B85324; --primary-light: rgba(184, 83, 36, 0.1); --bg: #f4f6f9; --bg-image: none;
+      --card-bg: #ffffff; --text: #1a1a1a; --text-muted: #666666; --border: #eeeeee; --nav-bg: #ffffff;
     }
-
     html, body { margin: 0; padding: 0; width: 100%; background-color: #e0e5ec; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Hind', sans-serif; }
     body { display: flex; justify-content: center; }
@@ -86,7 +78,6 @@
     .noti-meta .date { color: #94a3b8; }
     .noti-meta .type { color: var(--primary); }
 
-    /* NEW SECURE PROFILE CARD DESIGN */
     .profile-card-new { background: linear-gradient(135deg, var(--primary), #d35400); color: white; border-radius: 16px; padding: 20px; box-shadow: 0 10px 20px rgba(184,83,36,0.3); position: relative; overflow: hidden; margin-bottom: 20px; text-align: left; }
     .profile-card-new::after { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; }
     .prof-header-box { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; position: relative; z-index: 2; }
@@ -182,7 +173,7 @@
         </div>
         <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-chart-bar"></i></div>
-          <h3>SCHOLARSHIP RESULT<br>( if applicable)</h3>
+          <h3>SCHOLARSHIP RESULT</h3>
           <p>परीक्षा परिणाम और मार्कशीट</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
         </div>
@@ -230,7 +221,7 @@
         <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
       </div>
       <div id="notiList">
-        <p style="text-align:center; color:#666; font-size:14px; padding:20px;">नोटिफिकेशन्स लोड हो रहे हैं...</p>
+        <p style="text-align:center; color:#666; font-size:14px; padding:20px;">लोड हो रहे हैं...</p>
       </div>
     </div>
 
@@ -241,7 +232,6 @@
         <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
       </div>
       
-      <!-- Login Secure Section -->
       <div id="profileLoginSection">
         <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">सुरक्षित प्रोफाइल देखने के लिए लॉगिन करें।</p>
         <div class="input-group">
@@ -256,7 +246,6 @@
         <button class="btn-outline" onclick="openFindRollModal()">अपना रोल नंबर खोजें (Find Roll No)</button>
       </div>
 
-      <!-- Secure Data Section -->
       <div id="profileDataSection" style="display: none;">
         <div class="profile-card-new">
           <div class="prof-header-box">
@@ -279,31 +268,28 @@
       </div>
     </div>
 
-    <!-- Find Roll Number Modal (Simplified) -->
+    <!-- Find Roll Number Modal -->
     <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
       <div class="sheet-header">
         <h3>रोल नंबर खोजें</h3>
         <button class="close-sheet" onclick="closeFindRollModal()"><i class="fas fa-arrow-left"></i></button>
       </div>
-      <p style="font-size: 13px; color: var(--text-muted); text-align: left; margin-bottom: 15px;">FIND YOUR ROLL NUMBER :</p>
       
+      <div class="input-group"><label>विद्यार्थी का नाम (Student's Name)</label><input type="text" id="findName"></div>
       <div class="input-group"><label>माता का नाम (Mother's Name)</label><input type="text" id="findMother"></div>
-      <div class="input-group"><label>MOBILE NUMBER</label><input type="number" id="findMobile"></div>
+      <div class="input-group"><label>मोबाइल नंबर</label><input type="number" id="findMobile"></div>
       <button class="btn-main" id="btnSearchRoll" onclick="searchRollNumber()">खोजें (Search)</button>
       
       <div id="rollResult" style="display: none; margin-top: 20px; text-align: center; background: rgba(40,167,69,0.1); padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
-        <p style="font-size: 13px; color: #333;">YOUR ROLL NO IS :</p>
+        <p style="font-size: 13px; color: #333;">आपका रोल नंबर है:</p>
         <h2 id="displayRollNo" style="color: var(--primary); letter-spacing: 2px; margin: 5px 0;"></h2>
         <button onclick="copyRollNo('displayRollNo')" style="background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 5px; font-size:12px; cursor: pointer;"><i class="fas fa-copy"></i> कॉपी करें</button>
       </div>
     </div>
 
-    <!-- Theme Modal -->
+    <!-- Theme & Help Modals -->
     <div class="bottom-sheet" id="themeModal">
-      <div class="sheet-header">
-        <h3>SELECT THEME </h3>
-        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
-      </div>
+      <div class="sheet-header"><h3>SELECT THEME </h3><button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button></div>
       <div class="theme-grid">
         <div class="theme-option" onclick="setTheme('default', this)"> DEFAULT </div>
         <div class="theme-option" onclick="setTheme('diwali', this)"> DARK </div>
@@ -312,27 +298,12 @@
       </div>
     </div>
 
-    <!-- Help Modal -->
     <div class="bottom-sheet" id="helpModal">
-      <div class="sheet-header">
-        <h3>HELPLINE OR SUPPORT</h3>
-        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="support-card">
-        <div class="support-icon"><i class="fas fa-user-tie"></i></div>
-        <div class="support-details"><h4>Director: R.C.Royal</h4><p>GURUKUL SENIOR SECONDARY SCHOOL</p></div>
-      </div>
-      <div class="support-card">
-        <div class="support-icon"><i class="fas fa-user-shield"></i></div>
-        <div class="support-details"><h4>Chairman: H.S.Royal</h4><p> MANAGEMENT CELL </p></div>
-      </div>
-      <div class="support-card">
-        <div class="support-icon"><i class="fas fa-phone-alt"></i></div>
-        <div class="support-details"><h4>HELP LINE NO </h4><p>9772564359, 9887071127</p></div>
-        <a href="tel:9772564359" class="call-btn"><i class="fas fa-phone-square-alt"></i></a>
-      </div>
+      <div class="sheet-header"><h3>HELPLINE OR SUPPORT</h3><button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button></div>
+      <div class="support-card"><div class="support-icon"><i class="fas fa-user-tie"></i></div><div class="support-details"><h4>Director: R.C.Royal</h4><p>GURUKUL SENIOR SECONDARY SCHOOL</p></div></div>
+      <div class="support-card"><div class="support-icon"><i class="fas fa-user-shield"></i></div><div class="support-details"><h4>Chairman: H.S.Royal</h4><p> MANAGEMENT CELL </p></div></div>
+      <div class="support-card"><div class="support-icon"><i class="fas fa-phone-alt"></i></div><div class="support-details"><h4>HELP LINE NO </h4><p>9772564359, 9887071127</p></div><a href="tel:9772564359" class="call-btn"><i class="fas fa-phone-square-alt"></i></a></div>
     </div>
-
   </div>
 
   <!-- Custom Alert Overlay -->
@@ -348,57 +319,47 @@
   <script>
     const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx1WNu69vlJlFCNbY4w6AXhN5_2WNILM84_YCdRyIf4uNIPYpz17DmA6vS5cFYGGUU0/exec";
 
-    // --- Device ID System (For Single Device Login) ---
+    // --- Device ID System ---
     function getDeviceId() {
       let did = localStorage.getItem("device_id");
-      if(!did) {
-         did = 'DEV_' + Math.random().toString(36).substr(2, 9) + Date.now();
-         localStorage.setItem("device_id", did);
-      }
+      if(!did) { did = 'DEV_' + Math.random().toString(36).substr(2, 9) + Date.now(); localStorage.setItem("device_id", did); }
       return did;
     }
 
-    // --- Custom Alert Logic ---
+    // --- Custom Alerts ---
     function showCustomAlert(type, title, message) {
         const overlay = document.getElementById('customAlertOverlay');
         const iconDiv = document.getElementById('alertIcon');
-        
         document.getElementById('alertTitle').innerText = title;
         document.getElementById('alertMessage').innerText = message;
         
-        if (type === 'success') {
-            iconDiv.className = 'alert-icon success';
-            iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>';
-        } else if (type === 'error') {
-            iconDiv.className = 'alert-icon error';
-            iconDiv.innerHTML = '<i class="fas fa-times-circle"></i>';
-        } else {
-            iconDiv.className = 'alert-icon warning';
-            iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
-        }
+        if (type === 'success') { iconDiv.className = 'alert-icon success'; iconDiv.innerHTML = '<i class="fas fa-check-circle"></i>'; } 
+        else if (type === 'error') { iconDiv.className = 'alert-icon error'; iconDiv.innerHTML = '<i class="fas fa-times-circle"></i>'; } 
+        else { iconDiv.className = 'alert-icon warning'; iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>'; }
         overlay.classList.add('active');
     }
+    function closeCustomAlert() { document.getElementById('customAlertOverlay').classList.remove('active'); }
 
-    function closeCustomAlert() {
-        document.getElementById('customAlertOverlay').classList.remove('active');
-    }
-
-    // --- SMART PORTAL JUGAAD (Auto-Copy Roll Number) ---
+    // --- NEW: SMART PORTAL & BLOCK CHECK LOGIC ---
     function smartPortalOpen(url) {
         const roll = localStorage.getItem("gurukul_student_roll");
+        const status = localStorage.getItem("gurukul_acc_status");
+        
+        if(status === "Partial Block") {
+            showCustomAlert('error', 'Access Restricted 🚫', 'आपका पोर्टल एक्सेस रोक दिया गया है। कृपया फीस या अन्य जानकारी के लिए ऑफिस (9772564359) संपर्क करें।');
+            return;
+        }
+
         if (roll) {
             navigator.clipboard.writeText(roll).then(() => {
                 showCustomAlert('success', 'ऑटो-कॉपी सक्रिय ⚡', 'आपका रोल नंबर कॉपी कर लिया गया है। पोर्टल खुलने पर लॉगिन बॉक्स में उसे पेस्ट (Paste) करें।');
                 setTimeout(() => { window.location.href = url; }, 2500);
-            }).catch(err => {
-                window.location.href = url;
-            });
+            }).catch(() => { window.location.href = url; });
         } else {
             window.location.href = url;
         }
     }
 
-    // --- Greeting ---
     const hour = new Date().getHours();
     const greetingElement = document.getElementById('greetingText');
     if (hour >= 5 && hour < 12) greetingElement.innerHTML = "<i class='fas fa-sun'></i> GOOD MORNING!";
@@ -406,44 +367,21 @@
     else if (hour >= 17 && hour < 21) greetingElement.innerHTML = "<i class='fas fa-moon'></i> GOOD EVENING!";
     else greetingElement.innerHTML = "<i class='fas fa-star'></i> GOOD NIGHT!";
 
-    // --- Modals & Nav ---
-    function openModal(id) {
-        document.getElementById('overlay').classList.add('active');
-        document.getElementById(id).classList.add('active');
-    }
-    function closeAllModals() {
-        document.getElementById('overlay').classList.remove('active');
-        document.querySelectorAll('.bottom-sheet').forEach(sheet => sheet.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        document.querySelector('.nav-item').classList.add('active'); 
-    }
-    function setActiveNav(element) {
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        element.classList.add('active');
-    }
+    function openModal(id) { document.getElementById('overlay').classList.add('active'); document.getElementById(id).classList.add('active'); }
+    function closeAllModals() { document.getElementById('overlay').classList.remove('active'); document.querySelectorAll('.bottom-sheet').forEach(sheet => sheet.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active')); document.querySelector('.nav-item').classList.add('active'); }
+    function setActiveNav(element) { document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active')); element.classList.add('active'); }
 
-    function openNotifications() {
-        document.getElementById('notiDot').style.display = 'none';
-        openModal('notificationModal');
-    }
+    function openNotifications() { document.getElementById('notiDot').style.display = 'none'; openModal('notificationModal'); }
     
     async function fetchNotifications() {
         try {
             const res = await fetch(BACKEND_URL + "?action=getNotifications");
             const list = await res.json();
             let html = '';
-            if (list.length === 0) {
-                html = '<p style="text-align:center; padding:20px; color:#666;">कोई नया नोटिफिकेशन नहीं है।</p>';
-            } else {
+            if (list.length === 0) { html = '<p style="text-align:center; padding:20px; color:#666;">कोई नया नोटिफिकेशन नहीं है।</p>'; } 
+            else {
                 list.forEach(n => {
-                    html += `
-                    <div class="noti-item">
-                        <i class="fas fa-bullhorn"></i>
-                        <div class="noti-content">
-                            <h4>${n.title}</h4><p>${n.message}</p>
-                            <div class="noti-meta"><span class="date">${n.date}</span><span class="type">${n.type}</span></div>
-                        </div>
-                    </div>`;
+                    html += `<div class="noti-item"><i class="fas fa-bullhorn"></i><div class="noti-content"><h4>${n.title}</h4><p>${n.message}</p><div class="noti-meta"><span class="date">${n.date}</span><span class="type">${n.type}</span></div></div></div>`;
                 });
                 document.getElementById('notiDot').style.display = 'block';
             }
@@ -482,15 +420,14 @@
             
             if (data.status === "success") {
                 localStorage.setItem("gurukul_student_roll", data.rollNo);
+                localStorage.setItem("gurukul_acc_status", data.accStatus); // Store status
                 setProfileDataUI(data);
                 document.getElementById('profileLoginSection').style.display = 'none';
                 document.getElementById('profileDataSection').style.display = 'block';
             } else {
                 showCustomAlert('error', 'लॉगिन फेल', data.message);
             }
-        } catch (err) { 
-            showCustomAlert('error', 'सर्वर एरर', 'इंटरनेट या सर्वर से जुड़ने में त्रुटि!'); 
-        }
+        } catch (err) { showCustomAlert('error', 'सर्वर एरर', 'इंटरनेट या सर्वर से जुड़ने में त्रुटि!'); }
         btn.innerText = "लॉगिन करें"; btn.disabled = false;
     }
 
@@ -500,14 +437,16 @@
             const res = await fetch(BACKEND_URL + `?action=getProfile&rollno=${rollNo}&deviceId=${deviceId}`);
             const data = await res.json();
             
-            if (data.status === "session_expired") {
+            if(data.status === "blocked") {
                 logoutStudent();
-                showCustomAlert('warning', 'Session Expired', 'आपका अकाउंट किसी अन्य डिवाइस पर लॉगिन किया गया है, इसलिए आपको यहाँ से लॉगआउट कर दिया गया है।');
+                showCustomAlert('error', 'Account Blocked 🚫', 'आपका अकाउंट एडमिन द्वारा ब्लॉक कर दिया गया है।');
+            } else if (data.status === "session_expired") {
+                logoutStudent();
+                showCustomAlert('warning', 'Session Expired', 'आपका अकाउंट किसी अन्य डिवाइस पर लॉगिन किया गया है।');
             } else if (data.status === "success") {
+                localStorage.setItem("gurukul_acc_status", data.accStatus); // Update status silently
                 setProfileDataUI(data);
-            } else {
-                logoutStudent();
-            }
+            } else { logoutStudent(); }
         } catch (err) {}
     }
 
@@ -516,42 +455,34 @@
         document.getElementById('profFather').innerText = data.fatherName;
         document.getElementById('profClass').innerText = data.className;
         document.getElementById('displayProfRollNo').innerText = data.rollNo;
-        
-        // Number Masking Logic
         let mobStr = String(data.mobile);
-        let masked = mobStr.substring(0, 4) + "XXXXXX";
-        document.getElementById('profMobileMasked').innerText = masked;
+        document.getElementById('profMobileMasked').innerText = mobStr.substring(0, 4) + "XXXXXX";
     }
 
     function logoutStudent() {
         localStorage.removeItem("gurukul_student_roll");
+        localStorage.removeItem("gurukul_acc_status");
         document.getElementById('loginRollNo').value = "";
         document.getElementById('loginMobile').value = "";
         document.getElementById('profileDataSection').style.display = 'none';
         document.getElementById('profileLoginSection').style.display = 'block';
     }
 
-    // --- Find Roll Number (Shortened) ---
-    function openFindRollModal() {
-        document.getElementById('profileModal').classList.remove('active');
-        document.getElementById('findRollModal').classList.add('active');
-        document.getElementById('rollResult').style.display = 'none';
-    }
-    function closeFindRollModal() {
-        document.getElementById('findRollModal').classList.remove('active');
-        document.getElementById('profileModal').classList.add('active');
-    }
+    // --- Find Roll Number (Now Requires Student Name) ---
+    function openFindRollModal() { document.getElementById('profileModal').classList.remove('active'); document.getElementById('findRollModal').classList.add('active'); document.getElementById('rollResult').style.display = 'none'; }
+    function closeFindRollModal() { document.getElementById('findRollModal').classList.remove('active'); document.getElementById('profileModal').classList.add('active'); }
 
     async function searchRollNumber() {
+        const n = document.getElementById('findName').value;
         const m = document.getElementById('findMother').value;
         const mo = document.getElementById('findMobile').value;
         const btn = document.getElementById('btnSearchRoll');
 
-        if (!m || !mo) { showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया माता का नाम और मोबाइल नंबर भरें!'); return; }
+        if (!n || !m || !mo) { showCustomAlert('warning', 'अधूरी जानकारी', 'कृपया सभी 3 जानकारियाँ भरें!'); return; }
         btn.innerText = "खोजा जा रहा है..."; btn.disabled = true;
 
         try {
-            const url = BACKEND_URL + `?action=findRollNo&mother=${encodeURIComponent(m)}&mobile=${encodeURIComponent(mo)}`;
+            const url = BACKEND_URL + `?action=findRollNo&name=${encodeURIComponent(n)}&mother=${encodeURIComponent(m)}&mobile=${encodeURIComponent(mo)}`;
             const res = await fetch(url);
             const data = await res.json();
 
@@ -562,63 +493,36 @@
                 showCustomAlert('error', 'रिकॉर्ड नहीं मिला', data.message);
                 document.getElementById('rollResult').style.display = 'none';
             }
-        } catch (err) { showCustomAlert('error', 'सर्वर एरर', 'कुछ तकनीकी समस्या है।'); }
+        } catch (err) { showCustomAlert('error', 'एरर', 'तकनीकी समस्या!'); }
         
         btn.innerText = "खोजें (Search)"; btn.disabled = false;
     }
 
     function copyRollNo(elementId) {
         const rollNo = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(rollNo).then(() => { 
-            showCustomAlert('success', 'सफल', 'रोल नंबर क्लिपबोर्ड पर कॉपी हो गया है: ' + rollNo); 
-        });
+        navigator.clipboard.writeText(rollNo).then(() => { showCustomAlert('success', 'सफल', 'रोल नंबर क्लिपबोर्ड पर कॉपी हो गया: ' + rollNo); });
     }
-    
-    function copyProfRoll() {
-        copyRollNo('displayProfRollNo');
-    }
+    function copyProfRoll() { copyRollNo('displayProfRollNo'); }
 
-    // --- Themes ---
     const themesData = {
       'default': { bg: '#f4f6f9', bgImage: 'none', primary: '#B85324', primaryLight: 'rgba(184, 83, 36, 0.1)', nav: '#ffffff', card: '#ffffff', text: '#1a1a1a', textMuted: '#666666', border: '#eeeeee' },
       'diwali': { bg: '#121212', bgImage: 'linear-gradient(135deg, #1f0a0a 0%, #000000 100%)', primary: '#ff9800', primaryLight: 'rgba(255, 152, 0, 0.2)', nav: '#1e1e1e', card: '#242424', text: '#ffffff', textMuted: '#aaaaaa', border: '#333333' },
       'holi': { bg: '#fff0f5', bgImage: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', primary: '#d6336c', primaryLight: 'rgba(214, 51, 108, 0.15)', nav: '#ffffff', card: 'rgba(255,255,255,0.9)', text: '#1a1a1a', textMuted: '#555555', border: '#ffb3c6' },
       'sankranti': { bg: '#e0f7fa', bgImage: 'linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)', primary: '#0277bd', primaryLight: 'rgba(2, 119, 189, 0.15)', nav: '#ffffff', card: 'rgba(255,255,255,0.9)', text: '#1a1a1a', textMuted: '#444444', border: '#bbdefb' }
     };
-
     function setTheme(themeName, element) {
       const t = themesData[themeName];
-      document.documentElement.style.setProperty('--bg', t.bg);
-      document.documentElement.style.setProperty('--bg-image', t.bgImage);
-      document.documentElement.style.setProperty('--primary', t.primary);
-      document.documentElement.style.setProperty('--primary-light', t.primaryLight);
-      document.documentElement.style.setProperty('--nav-bg', t.nav);
-      document.documentElement.style.setProperty('--card-bg', t.card);
-      document.documentElement.style.setProperty('--text', t.text);
-      document.documentElement.style.setProperty('--text-muted', t.textMuted);
-      document.documentElement.style.setProperty('--border', t.border);
+      document.documentElement.style.setProperty('--bg', t.bg); document.documentElement.style.setProperty('--bg-image', t.bgImage); document.documentElement.style.setProperty('--primary', t.primary); document.documentElement.style.setProperty('--primary-light', t.primaryLight); document.documentElement.style.setProperty('--nav-bg', t.nav); document.documentElement.style.setProperty('--card-bg', t.card); document.documentElement.style.setProperty('--text', t.text); document.documentElement.style.setProperty('--text-muted', t.textMuted); document.documentElement.style.setProperty('--border', t.border);
       localStorage.setItem("app_theme", themeName);
-      
-      document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
-      if(element) element.classList.add('selected');
-      setTimeout(closeAllModals, 300);
+      document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected')); if(element) element.classList.add('selected'); setTimeout(closeAllModals, 300);
     }
 
-    // --- On Load ---
     window.onload = () => {
         const savedTheme = localStorage.getItem("app_theme") || 'default';
         const opts = document.querySelectorAll('.theme-option');
-        let tgt = opts[0];
-        if(savedTheme === 'diwali') tgt = opts[1];
-        if(savedTheme === 'holi') tgt = opts[2];
-        if(savedTheme === 'sankranti') tgt = opts[3];
-        setTheme(savedTheme, tgt);
-        
-        fetchNotifications();
-        getDeviceId(); // Setup Device ID on first load
-        
-        const roll = localStorage.getItem("gurukul_student_roll");
-        if(roll) fetchProfileData(roll);
+        let tgt = opts[0]; if(savedTheme === 'diwali') tgt = opts[1]; if(savedTheme === 'holi') tgt = opts[2]; if(savedTheme === 'sankranti') tgt = opts[3]; setTheme(savedTheme, tgt);
+        fetchNotifications(); getDeviceId(); 
+        const roll = localStorage.getItem("gurukul_student_roll"); if(roll) fetchProfileData(roll);
     };
   </script>
 </body>
