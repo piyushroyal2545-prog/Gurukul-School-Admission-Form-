@@ -21,55 +21,22 @@
       --nav-bg: #ffffff;
     }
 
-    /* Scroll Fix: Enabled Native Window Scrolling */
-    html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        background-color: #e0e5ec;
-        -webkit-tap-highlight-color: transparent;
-        overflow-x: hidden; 
-        scroll-behavior: smooth;
-    }
-
+    html, body { margin: 0; padding: 0; width: 100%; background-color: #e0e5ec; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth; }
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Hind', sans-serif; }
-    
     body { display: flex; justify-content: center; }
 
-    .app-container {
-        width: 100%; max-width: 480px; 
-        min-height: 100vh; /* Changed from fixed height to min-height */
-        background: var(--bg); background-image: var(--bg-image);
-        background-size: cover; background-attachment: fixed; position: relative;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;
-        color: var(--text); transition: all 0.3s ease;
-    }
+    .app-container { width: 100%; max-width: 480px; min-height: 100vh; background: var(--bg); background-image: var(--bg-image); background-size: cover; background-attachment: fixed; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; color: var(--text); transition: all 0.3s ease; }
 
-    /* Sticky Header - Fixes to the top while scrolling */
-    .app-header {
-        background: var(--nav-bg); padding: 15px 20px; display: flex; justify-content: space-between;
-        align-items: center; border-bottom: 1px solid var(--border); z-index: 110; 
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        position: sticky; top: 0; 
-    }
-    
+    .app-header { background: var(--nav-bg); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); z-index: 110; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; }
     .header-logo-group { display: flex; align-items: center; gap: 12px; }
     .header-logo-group img { height: 40px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .school-titles h1 { font-size: 16px; color: var(--primary); font-weight: 700; line-height: 1.2; }
     .school-titles p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
-    
     .notification-bell { font-size: 20px; color: var(--primary); position: relative; cursor: pointer; }
     .notification-dot { position: absolute; top: 0; right: -2px; width: 8px; height: 8px; background: red; border-radius: 50%; border: 2px solid var(--nav-bg); display: none; }
 
-    /* App Body - Natural scrolling allowed */
-    .app-body { 
-        padding-bottom: 110px; /* Space for the floating nav at bottom */
-    }
-
-    .greeting-section {
-        padding: 20px; background: var(--primary); color: white; border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px; box-shadow: 0 4px 15px rgba(184, 83, 36, 0.2);
-    }
+    .app-body { padding-bottom: 110px; }
+    .greeting-section { padding: 20px; background: var(--primary); color: white; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0 4px 15px rgba(184, 83, 36, 0.2); }
     .greeting-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
     .greeting-section p { font-size: 13px; opacity: 0.9; line-height: 1.5; font-weight: 500; }
 
@@ -77,81 +44,40 @@
 
     .horizontal-scroll { display: flex; gap: 15px; padding: 0 20px 10px 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
     .horizontal-scroll::-webkit-scrollbar { display: none; }
-    .quick-card {
-        min-width: 130px; background: var(--card-bg); padding: 15px; border-radius: 16px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; text-decoration: none;
-        scroll-snap-align: start; border: 1px solid var(--border);
-    }
+    .quick-card { min-width: 130px; background: var(--card-bg); padding: 15px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; text-decoration: none; scroll-snap-align: start; border: 1px solid var(--border); cursor: pointer; }
     .quick-card i { font-size: 24px; color: var(--primary); margin-bottom: 10px; }
     .quick-card h4 { font-size: 14px; color: var(--text); font-weight: 600; margin-bottom: 5px; }
     .quick-card p { font-size: 11px; color: var(--text-muted); font-weight: 500;}
 
     .portal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px 20px 20px; }
-    .grid-card {
-        background: var(--card-bg); border-radius: 16px; padding: 15px; text-decoration: none;
-        display: flex; flex-direction: column; align-items: flex-start; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-        border: 1px solid var(--border); position: relative;
-    }
+    .grid-card { background: var(--card-bg); border-radius: 16px; padding: 15px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid var(--border); position: relative; cursor: pointer; }
     .grid-card .icon-wrapper { width: 40px; height: 40px; background: var(--primary-light); border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; }
     .grid-card i { font-size: 18px; color: var(--primary); }
     .grid-card h3 { font-size: 15px; color: var(--text); margin-bottom: 4px; font-weight: 600; }
     .grid-card p { font-size: 12px; color: var(--text-muted); line-height: 1.3; margin-bottom: 15px; font-weight: 500;}
-    .grid-card .arrow-btn {
-        margin-top: auto; align-self: flex-end; background: var(--primary); color: white;
-        width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px;
-    }
+    .grid-card .arrow-btn { margin-top: auto; align-self: flex-end; background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; }
 
-    /* Fixed Floating Bottom Nav */
-    .bottom-nav {
-        position: fixed; 
-        bottom: 20px; 
-        left: 50%;
-        transform: translateX(-50%);
-        width: 92%; 
-        max-width: 440px;
-        background: var(--nav-bg); 
-        display: flex;
-        justify-content: space-around; 
-        padding: 12px 0; 
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        border: 1px solid var(--border); 
-        border-radius: 20px; 
-        z-index: 100;
-    }
+    .bottom-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 440px; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid var(--border); border-radius: 20px; z-index: 100; }
     .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); gap: 4px; cursor: pointer; }
     .nav-item.active { color: var(--primary); }
     .nav-item i { font-size: 20px; }
     .nav-item span { font-size: 11px; font-weight: 600; }
 
-    /* Modals CSS Updated for Fixed Positioning */
-    .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
-        z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease;
-    }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease; }
     .modal-overlay.active { display: block; opacity: 1; }
-    
-    .bottom-sheet {
-        position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%); 
-        width: 100%; max-width: 480px; background: var(--nav-bg);
-        border-top-left-radius: 20px; border-top-right-radius: 20px; 
-        padding: 20px 20px 40px 20px; 
-        z-index: 1001; transition: bottom 0.3s ease; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); 
-        max-height: 85vh; overflow-y: auto;
-    }
+    .bottom-sheet { position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--nav-bg); border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px 20px 40px 20px; z-index: 1001; transition: bottom 0.3s ease; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); max-height: 85vh; overflow-y: auto; }
     .bottom-sheet.active { bottom: 0; }
     .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
     .sheet-header h3 { font-size: 18px; color: var(--text); font-weight: 700; }
     .close-sheet { font-size: 22px; color: var(--text-muted); background: none; border: none; cursor: pointer; }
 
-    /* Forms */
     .input-group { margin-bottom: 15px; text-align: left; }
     .input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
     .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; }
     .input-group input:focus { border-color: var(--primary); }
     .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 5px; }
     .btn-outline { width: 100%; background: transparent; color: var(--primary); border: 2px solid var(--primary); padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 15px; }
-    
-    /* Notifications & Profile Elements */
+
     .noti-item { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; gap: 15px; align-items: flex-start; }
     .noti-item i { color: var(--primary); font-size: 20px; background: var(--primary-light); padding: 10px; border-radius: 50%; }
     .noti-content h4 { font-size: 15px; color: var(--text); font-weight: 600; margin-bottom: 3px; }
@@ -160,17 +86,21 @@
     .noti-meta .date { color: #94a3b8; }
     .noti-meta .type { color: var(--primary); }
 
-    .profile-info { text-align: center; margin-bottom: 20px; }
-    .profile-info i { font-size: 60px; color: var(--primary); margin-bottom: 10px; }
-    .profile-info h3 { font-size: 20px; color: var(--text); font-weight: 700; margin-bottom: 5px;}
-    .profile-info p { font-size: 14px; color: var(--text-muted); font-weight: 500;}
-    .profile-detail-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: left; }
-    .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
-    .detail-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
-    .detail-label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
-    .detail-value { font-size: 13px; color: var(--text); font-weight: 700; }
+    /* NEW SECURE PROFILE CARD DESIGN */
+    .profile-card-new { background: linear-gradient(135deg, var(--primary), #d35400); color: white; border-radius: 16px; padding: 20px; box-shadow: 0 10px 20px rgba(184,83,36,0.3); position: relative; overflow: hidden; margin-bottom: 20px; text-align: left; }
+    .profile-card-new::after { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+    .prof-header-box { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; position: relative; z-index: 2; }
+    .prof-avatar { width: 55px; height: 55px; background: white; color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .prof-title h3 { font-size: 18px; margin: 0; font-weight: 700; text-transform: uppercase; }
+    .prof-title p { font-size: 12px; margin: 0; opacity: 0.9; }
+    .prof-body-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; position: relative; z-index: 2; }
+    .prof-label { opacity: 0.8; font-weight: 500; }
+    .prof-val { font-weight: 700; }
+    .roll-copy-box { background: rgba(0,0,0,0.2); padding: 12px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 15px; position: relative; z-index: 2; border: 1px solid rgba(255,255,255,0.3); }
+    .roll-copy-box span { font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+    .copy-btn-small { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; }
+    .copy-btn-small:active { transform: scale(0.95); }
 
-    /* Themes & Support */
     .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .theme-option { padding: 15px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); text-align: center; cursor: pointer; color: var(--text); font-weight: 600; font-size: 14px; }
     .theme-option.selected { border-color: var(--primary); background: var(--primary-light); }
@@ -180,16 +110,9 @@
     .support-details p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
     .call-btn { margin-left: auto; color: #25D366; font-size: 22px; text-decoration: none; }
 
-    /* Custom Professional Alert */
-    .custom-alert-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);
-        z-index: 9999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;
-    }
+    .custom-alert-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
     .custom-alert-overlay.active { display: flex; opacity: 1; }
-    .custom-alert-box {
-        background: var(--card-bg); width: 85%; max-width: 320px; border-radius: 20px; padding: 25px 20px;
-        text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
+    .custom-alert-box { background: var(--card-bg); width: 85%; max-width: 320px; border-radius: 20px; padding: 25px 20px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .custom-alert-overlay.active .custom-alert-box { transform: scale(1); }
     .alert-icon { font-size: 50px; margin-bottom: 15px; }
     .alert-icon.success { color: #28a745; }
@@ -220,65 +143,65 @@
 
     <main class="app-body">
       <div class="greeting-section">
-        <h2 id="greetingText">STUDENT DASHBOARD</h2>
+        <h2 id="greetingText">STUDENT DASHBOARD </h2>
         <p> कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करें।<br>★ हम आपके उज्जवल भविष्य की कामना करते हैं ★</p>
       </div>
 
       <div class="section-title">क्विक एक्सेस</div>
       <div class="horizontal-scroll">
-        <a href="https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec" class="quick-card">
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbwyg4suQmtRqa7mjY_d6YDaS6s25kWkrsgmadRnPlFgdBVe26geUL9F-_c4ozixADea/exec')" class="quick-card">
           <i class="fas fa-tasks"></i>
           <h4>Daily Test</h4>
           <p>CHECK TEST REPORT</p>
-        </a>
-        <a href="https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US" class="quick-card">
+        </div>
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbwHNfP42OCoYa08fSLpSbDmT4cFmOgJQb3g4QVJ-4clGZ6iJvVUDdMtyUOXFjAyVhg/exec?hl=en-US')" class="quick-card">
           <i class="fas fa-book-reader"></i>
           <h4>HOMEWORK</h4>
           <p> DAILY HOMEWORK </p>
-        </a>
-        <a href="https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec" class="quick-card">
+        </div>
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbxZ_CYQRWBqrw7UQMXdzDl4LUIBOIy-SmqBSOHcG631HLPv57bcBz2nvr15Vz9S3KXc/exec')" class="quick-card">
           <i class="fas fa-rupee-sign"></i>
           <h4>Fees</h4>
           <p>Check Status</p>
-        </a>
+        </div>
       </div>
 
       <div class="section-title">EXAM OR RESULTS</div>
       <div class="portal-grid">
-        <a href="https://script.google.com/macros/s/AKfycbxv6S_OHsxQG5t3EftnyClpNL_2f4pxjUeEE9RE0JV6a-S9Eitmwe3-Al9kwIGdwLzs4A/exec?=US" class="grid-card">
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbxv6S_OHsxQG5t3EftnyClpNL_2f4pxjUeEE9RE0JV6a-S9Eitmwe3-Al9kwIGdwLzs4A/exec?=US')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-file-alt"></i></div>
           <h3> HALF YEARLY </h3>
           <p>अर्धवार्षिक परीक्षा पोर्टल एक्सेस करें</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
-        </a>
-        <a href="https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US" class="grid-card">
+        </div>
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbzvwevN3OXU4U64_4pQU9bC-rNattaSjSX0SYu6NbXJTzc5XUxdFEIHIhoGfAaMg8ANig/exec?page=en-US')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-id-badge"></i></div>
           <h3> ANNUAL REPORT </h3>
           <p>अपना वार्षिक परिणाम यहाँ देखें</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
-        </a>
-        <a href="https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec" class="grid-card">
+        </div>
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbx3aTQYSBiyskSrF_IP3ar0i_ESHkNoPbwqLNeGF7o2P-7u-pERlHYxttlhhCLpf40j/exec')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-chart-bar"></i></div>
           <h3>SCHOLARSHIP RESULT<br>( if applicable)</h3>
           <p>परीक्षा परिणाम और मार्कशीट</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
-        </a>
+        </div>
       </div>
 
       <div class="section-title"> ADMISSION OR FORMS </div>
       <div class="portal-grid">
-        <a href="https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec" class="grid-card">
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div>
           <h3>स्कूल एडमिशन</h3>
           <p>नए सत्र के लिए फॉर्म भरें</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
-        </a>
-        <a href="https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US" class="grid-card">
+        </div>
+        <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycbyNb8HXMppE2yN3h61hhPEYN3gBacGJjRWCLgCVMcNvry1XCtsPY1DYciWbGd_gZoJVIg/exec?hl=en-US')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-award"></i></div>
           <h3>स्कॉलरशिप फॉर्म</h3>
           <p>छात्रवृत्ति के लिए आवेदन करें</p>
           <div class="arrow-btn"><i class="fas fa-chevron-right"></i></div>
-        </a>
+        </div>
       </div>
     </main>
 
@@ -318,48 +241,60 @@
         <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
       </div>
       
+      <!-- Login Secure Section -->
       <div id="profileLoginSection">
-        <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">प्रोफाइल देखने के लिए अपना रोल नंबर दर्ज करें।</p>
+        <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">सुरक्षित प्रोफाइल देखने के लिए लॉगिन करें।</p>
         <div class="input-group">
           <label>रोल नंबर (Roll Number)</label>
           <input type="number" id="loginRollNo" placeholder="अपना रोल नंबर दर्ज करें">
+        </div>
+        <div class="input-group">
+          <label>रजिस्टर्ड मोबाइल नंबर</label>
+          <input type="number" id="loginMobile" placeholder="स्कूल में दिया गया मोबाइल नंबर">
         </div>
         <button class="btn-main" id="btnLogin" onclick="loginStudent()">लॉगिन करें</button>
         <button class="btn-outline" onclick="openFindRollModal()">अपना रोल नंबर खोजें (Find Roll No)</button>
       </div>
 
+      <!-- Secure Data Section -->
       <div id="profileDataSection" style="display: none;">
-        <div class="profile-info">
-          <i class="fas fa-user-graduate"></i>
-          <h3 id="profName">-</h3>
-          <p id="profClassRoll">-</p>
-        </div>
-        <div class="profile-detail-box">
-          <div class="detail-row"><span class="detail-label">पिता का नाम</span><span class="detail-value" id="profFather">-</span></div>
-          <div class="detail-row"><span class="detail-label">कक्षा</span><span class="detail-value" id="profClass">-</span></div>
-          <div class="detail-row"><span class="detail-label">मोबाइल</span><span class="detail-value" id="profMobile">-</span></div>
+        <div class="profile-card-new">
+          <div class="prof-header-box">
+            <div class="prof-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div class="prof-title">
+              <h3 id="profName">-</h3>
+              <p>Gurukul Sr. Sec. School</p>
+            </div>
+          </div>
+          <div class="prof-body-row"><span class="prof-label">पिता का नाम:</span><span class="prof-val" id="profFather">-</span></div>
+          <div class="prof-body-row"><span class="prof-label">कक्षा:</span><span class="prof-val" id="profClass">-</span></div>
+          <div class="prof-body-row"><span class="prof-label">मोबाइल:</span><span class="prof-val" id="profMobileMasked">-</span></div>
+          
+          <div class="roll-copy-box">
+            <span id="displayProfRollNo">000000</span>
+            <button class="copy-btn-small" onclick="copyProfRoll()"><i class="fas fa-copy"></i> Copy</button>
+          </div>
         </div>
         <button class="btn-main" style="background: #dc3545;" onclick="logoutStudent()">लॉगआउट</button>
       </div>
     </div>
 
-    <!-- Find Roll Number Modal -->
+    <!-- Find Roll Number Modal (Simplified) -->
     <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
       <div class="sheet-header">
         <h3>रोल नंबर खोजें</h3>
         <button class="close-sheet" onclick="closeFindRollModal()"><i class="fas fa-arrow-left"></i></button>
       </div>
-      <div class="input-group"><label>विद्यार्थी का नाम</label><input type="text" id="findName"></div>
-      <div class="input-group"><label>पिता का नाम</label><input type="text" id="findFather"></div>
-      <div class="input-group"><label>माता का नाम</label><input type="text" id="findMother"></div>
-      <div class="input-group"><label>जन्म तिथि (DOB)</label><input type="date" id="findDob"></div>
-      <div class="input-group"><label>मोबाइल नंबर</label><input type="number" id="findMobile"></div>
+      <p style="font-size: 13px; color: var(--text-muted); text-align: left; margin-bottom: 15px;">FIND YOUR ROLL NUMBER :</p>
+      
+      <div class="input-group"><label>माता का नाम (Mother's Name)</label><input type="text" id="findMother"></div>
+      <div class="input-group"><label>MOBILE NUMBER</label><input type="number" id="findMobile"></div>
       <button class="btn-main" id="btnSearchRoll" onclick="searchRollNumber()">खोजें (Search)</button>
       
       <div id="rollResult" style="display: none; margin-top: 20px; text-align: center; background: rgba(40,167,69,0.1); padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
-        <p style="font-size: 13px; color: #333;">आपका रोल नंबर है:</p>
+        <p style="font-size: 13px; color: #333;">YOUR ROLL NO IS :</p>
         <h2 id="displayRollNo" style="color: var(--primary); letter-spacing: 2px; margin: 5px 0;"></h2>
-        <button onclick="copyRollNo()" style="background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 5px; font-size:12px; cursor: pointer;"><i class="fas fa-copy"></i> कॉपी करें</button>
+        <button onclick="copyRollNo('displayRollNo')" style="background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 5px; font-size:12px; cursor: pointer;"><i class="fas fa-copy"></i> कॉपी करें</button>
       </div>
     </div>
 
@@ -413,6 +348,16 @@
   <script>
     const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx1WNu69vlJlFCNbY4w6AXhN5_2WNILM84_YCdRyIf4uNIPYpz17DmA6vS5cFYGGUU0/exec";
 
+    // --- Device ID System (For Single Device Login) ---
+    function getDeviceId() {
+      let did = localStorage.getItem("device_id");
+      if(!did) {
+         did = 'DEV_' + Math.random().toString(36).substr(2, 9) + Date.now();
+         localStorage.setItem("device_id", did);
+      }
+      return did;
+    }
+
     // --- Custom Alert Logic ---
     function showCustomAlert(type, title, message) {
         const overlay = document.getElementById('customAlertOverlay');
@@ -436,6 +381,21 @@
 
     function closeCustomAlert() {
         document.getElementById('customAlertOverlay').classList.remove('active');
+    }
+
+    // --- SMART PORTAL JUGAAD (Auto-Copy Roll Number) ---
+    function smartPortalOpen(url) {
+        const roll = localStorage.getItem("gurukul_student_roll");
+        if (roll) {
+            navigator.clipboard.writeText(roll).then(() => {
+                showCustomAlert('success', 'ऑटो-कॉपी सक्रिय ⚡', 'आपका रोल नंबर कॉपी कर लिया गया है। पोर्टल खुलने पर लॉगिन बॉक्स में उसे पेस्ट (Paste) करें।');
+                setTimeout(() => { window.location.href = url; }, 2500);
+            }).catch(err => {
+                window.location.href = url;
+            });
+        } else {
+            window.location.href = url;
+        }
     }
 
     // --- Greeting ---
@@ -462,7 +422,6 @@
         element.classList.add('active');
     }
 
-    // --- Notifications ---
     function openNotifications() {
         document.getElementById('notiDot').style.display = 'none';
         openModal('notificationModal');
@@ -489,9 +448,7 @@
                 document.getElementById('notiDot').style.display = 'block';
             }
             document.getElementById('notiList').innerHTML = html;
-        } catch (err) {
-            document.getElementById('notiList').innerHTML = '<p style="text-align:center; color:red;">सर्वर से जुड़ने में त्रुटि!</p>';
-        }
+        } catch (err) { }
     }
 
     // --- Profile & Login ---
@@ -510,45 +467,71 @@
 
     async function loginStudent() {
         const roll = document.getElementById('loginRollNo').value;
+        const mobile = document.getElementById('loginMobile').value;
         const btn = document.getElementById('btnLogin');
-        if (!roll) { showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया अपना रोल नंबर दर्ज करें!'); return; }
+        
+        if (!roll || !mobile) { showCustomAlert('warning', 'जानकारी अधूरी है', 'रोल नंबर और मोबाइल नंबर दोनों दर्ज करें!'); return; }
         
         btn.innerText = "सत्यापित हो रहा है..."; btn.disabled = true;
-        await fetchProfileData(roll);
+        
+        try {
+            const deviceId = getDeviceId();
+            const url = BACKEND_URL + `?action=loginProfile&rollno=${roll}&mobile=${mobile}&deviceId=${deviceId}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            
+            if (data.status === "success") {
+                localStorage.setItem("gurukul_student_roll", data.rollNo);
+                setProfileDataUI(data);
+                document.getElementById('profileLoginSection').style.display = 'none';
+                document.getElementById('profileDataSection').style.display = 'block';
+            } else {
+                showCustomAlert('error', 'लॉगिन फेल', data.message);
+            }
+        } catch (err) { 
+            showCustomAlert('error', 'सर्वर एरर', 'इंटरनेट या सर्वर से जुड़ने में त्रुटि!'); 
+        }
         btn.innerText = "लॉगिन करें"; btn.disabled = false;
     }
 
     async function fetchProfileData(rollNo) {
         try {
-            const res = await fetch(BACKEND_URL + "?action=getProfile&rollno=" + rollNo);
+            const deviceId = getDeviceId();
+            const res = await fetch(BACKEND_URL + `?action=getProfile&rollno=${rollNo}&deviceId=${deviceId}`);
             const data = await res.json();
-            if (data.status === "success") {
-                localStorage.setItem("gurukul_student_roll", data.rollNo);
-                
-                document.getElementById('profName').innerText = data.name;
-                document.getElementById('profClassRoll').innerText = `कक्षा: ${data.className} | रोल नंबर: ${data.rollNo}`;
-                document.getElementById('profFather').innerText = data.fatherName;
-                document.getElementById('profClass').innerText = data.className;
-                document.getElementById('profMobile').innerText = data.mobile;
-                
-                document.getElementById('profileLoginSection').style.display = 'none';
-                document.getElementById('profileDataSection').style.display = 'block';
+            
+            if (data.status === "session_expired") {
+                logoutStudent();
+                showCustomAlert('warning', 'Session Expired', 'आपका अकाउंट किसी अन्य डिवाइस पर लॉगिन किया गया है, इसलिए आपको यहाँ से लॉगआउट कर दिया गया है।');
+            } else if (data.status === "success") {
+                setProfileDataUI(data);
             } else {
-                showCustomAlert('error', 'रिकॉर्ड नहीं मिला', data.message || "दिए गए रोल नंबर का कोई छात्र नहीं मिला।");
+                logoutStudent();
             }
-        } catch (err) { 
-            showCustomAlert('error', 'सर्वर एरर', 'सर्वर से जुड़ने में त्रुटि! कृपया पुनः प्रयास करें।'); 
-        }
+        } catch (err) {}
+    }
+
+    function setProfileDataUI(data) {
+        document.getElementById('profName').innerText = data.name;
+        document.getElementById('profFather').innerText = data.fatherName;
+        document.getElementById('profClass').innerText = data.className;
+        document.getElementById('displayProfRollNo').innerText = data.rollNo;
+        
+        // Number Masking Logic
+        let mobStr = String(data.mobile);
+        let masked = mobStr.substring(0, 4) + "XXXXXX";
+        document.getElementById('profMobileMasked').innerText = masked;
     }
 
     function logoutStudent() {
         localStorage.removeItem("gurukul_student_roll");
         document.getElementById('loginRollNo').value = "";
+        document.getElementById('loginMobile').value = "";
         document.getElementById('profileDataSection').style.display = 'none';
         document.getElementById('profileLoginSection').style.display = 'block';
     }
 
-    // --- Find Roll Number ---
+    // --- Find Roll Number (Shortened) ---
     function openFindRollModal() {
         document.getElementById('profileModal').classList.remove('active');
         document.getElementById('findRollModal').classList.add('active');
@@ -560,21 +543,15 @@
     }
 
     async function searchRollNumber() {
-        const n = document.getElementById('findName').value;
-        const f = document.getElementById('findFather').value;
         const m = document.getElementById('findMother').value;
-        const d = document.getElementById('findDob').value;
         const mo = document.getElementById('findMobile').value;
         const btn = document.getElementById('btnSearchRoll');
 
-        if (!n || !f || !m || !d || !mo) { 
-            showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया सभी 5 जानकारियां सही-सही भरें!'); 
-            return; 
-        }
+        if (!m || !mo) { showCustomAlert('warning', 'जानकारी अधूरी है', 'कृपया माता का नाम और मोबाइल नंबर भरें!'); return; }
         btn.innerText = "खोजा जा रहा है..."; btn.disabled = true;
 
         try {
-            const url = BACKEND_URL + `?action=findRollNo&name=${encodeURIComponent(n)}&father=${encodeURIComponent(f)}&mother=${encodeURIComponent(m)}&dob=${encodeURIComponent(d)}&mobile=${encodeURIComponent(mo)}`;
+            const url = BACKEND_URL + `?action=findRollNo&mother=${encodeURIComponent(m)}&mobile=${encodeURIComponent(mo)}`;
             const res = await fetch(url);
             const data = await res.json();
 
@@ -585,18 +562,20 @@
                 showCustomAlert('error', 'रिकॉर्ड नहीं मिला', data.message);
                 document.getElementById('rollResult').style.display = 'none';
             }
-        } catch (err) { 
-            showCustomAlert('error', 'सर्वर एरर', 'कुछ तकनीकी समस्या है, कृपया पुनः प्रयास करें।'); 
-        }
+        } catch (err) { showCustomAlert('error', 'सर्वर एरर', 'कुछ तकनीकी समस्या है।'); }
         
         btn.innerText = "खोजें (Search)"; btn.disabled = false;
     }
 
-    function copyRollNo() {
-        const rollNo = document.getElementById('displayRollNo').innerText;
+    function copyRollNo(elementId) {
+        const rollNo = document.getElementById(elementId).innerText;
         navigator.clipboard.writeText(rollNo).then(() => { 
             showCustomAlert('success', 'सफल', 'रोल नंबर क्लिपबोर्ड पर कॉपी हो गया है: ' + rollNo); 
         });
+    }
+    
+    function copyProfRoll() {
+        copyRollNo('displayProfRollNo');
     }
 
     // --- Themes ---
@@ -636,6 +615,7 @@
         setTheme(savedTheme, tgt);
         
         fetchNotifications();
+        getDeviceId(); // Setup Device ID on first load
         
         const roll = localStorage.getItem("gurukul_student_roll");
         if(roll) fetchProfileData(roll);
