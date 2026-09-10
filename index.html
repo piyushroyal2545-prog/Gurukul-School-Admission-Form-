@@ -112,6 +112,21 @@
     .custom-alert-box h3 { font-size: 18px; color: var(--text); margin-bottom: 8px; font-weight: 700; }
     .custom-alert-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
     .alert-btn { background: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; }
+
+    /* -- Helpdesk Widget Styles -- */
+    #gurukul-chat-widget { position: fixed; bottom: 100px; right: 20px; z-index: 9999; font-family: 'Poppins', sans-serif; }
+    #chat-box { display: none; width: 300px; height: 350px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; margin-bottom: 15px; }
+    #chat-header { background: var(--primary); color: white; padding: 12px; font-weight: 600; cursor: pointer; text-align: center; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
+    #chat-body { flex: 1; padding: 15px; overflow-y: auto; background: var(--bg); display: flex; flex-direction: column; gap: 10px; }
+    .chat-msg { padding: 10px 12px; border-radius: 8px; max-width: 80%; word-wrap: break-word; font-size: 13px; font-weight: 500; }
+    .chat-msg.student { background: var(--primary-light); color: var(--text); align-self: flex-end; border: 1px solid var(--primary); }
+    .chat-msg.admin { background: var(--card-bg); color: var(--text); border: 1px solid var(--border); align-self: flex-start; }
+    #chat-input-area { display: flex; border-top: 1px solid var(--border); background: var(--card-bg); }
+    #chat-input { flex: 1; padding: 12px; border: none; outline: none; font-size: 13px; background: transparent; color: var(--text); }
+    #chat-send-btn { background: var(--primary); color: white; border: none; padding: 0 18px; cursor: pointer; font-size: 15px; transition: 0.2s; }
+    #chat-send-btn:active { opacity: 0.8; }
+    #chat-toggle { background: var(--primary); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 24px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); float: right; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+    #chat-toggle:active { transform: scale(0.9); }
   </style>
 </head>
 <body>
@@ -316,6 +331,26 @@
     </div>
   </div>
 
+  <!-- Gurukul Helpdesk Widget -->
+  <div id="gurukul-chat-widget">
+    <div id="chat-box">
+      <div id="chat-header" onclick="toggleChat()">
+        <span><i class="fas fa-headset"></i> Live Helpdesk</span>
+        <i class="fas fa-times"></i>
+      </div>
+      <div id="chat-body"></div>
+      <div id="chat-input-area">
+        <input type="text" id="chat-input" placeholder="अपना सवाल यहाँ लिखें...">
+        <button id="chat-send-btn" onclick="sendChatMsg()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <button id="chat-toggle" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
   <script>
     const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx1WNu69vlJlFCNbY4w6AXhN5_2WNILM84_YCdRyIf4uNIPYpz17DmA6vS5cFYGGUU0/exec";
 
@@ -468,7 +503,7 @@
         document.getElementById('profileLoginSection').style.display = 'block';
     }
 
-    // --- Find Roll Number (Now Requires Student Name) ---
+    // --- Find Roll Number ---
     function openFindRollModal() { document.getElementById('profileModal').classList.remove('active'); document.getElementById('findRollModal').classList.add('active'); document.getElementById('rollResult').style.display = 'none'; }
     function closeFindRollModal() { document.getElementById('findRollModal').classList.remove('active'); document.getElementById('profileModal').classList.add('active'); }
 
@@ -516,6 +551,68 @@
       localStorage.setItem("app_theme", themeName);
       document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected')); if(element) element.classList.add('selected'); setTimeout(closeAllModals, 300);
     }
+
+    // --- Firebase Helpdesk Logic ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJvnocepvxTX0KI4K5HzmMNQXlvyTKywc",
+      authDomain: "gurukul-help-desk.firebaseapp.com",
+      projectId: "gurukul-help-desk",
+      storageBucket: "gurukul-help-desk.firebasestorage.app",
+      messagingSenderId: "692964544513",
+      appId: "1:692964544513:web:4247ef6db12664aaa2f000",
+      measurementId: "G-KF3T0R7Y3G"
+    };
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+    const db = firebase.database();
+
+    let chatStudentId = localStorage.getItem('gurukul_student_id');
+    if (!chatStudentId) {
+      chatStudentId = 'STU_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('gurukul_student_id', chatStudentId);
+    }
+    
+    let localChats = JSON.parse(localStorage.getItem('gurukul_chats')) || [];
+    const chatBody = document.getElementById('chat-body');
+
+    function renderChats() {
+      chatBody.innerHTML = '';
+      localChats.forEach(chat => {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + chat.sender;
+        div.innerText = chat.text;
+        chatBody.appendChild(div);
+      });
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function toggleChat() {
+      const box = document.getElementById('chat-box');
+      box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+      if(box.style.display === 'flex') renderChats();
+    }
+
+    function sendChatMsg() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const msgData = { sender: 'student', text: text, timestamp: Date.now() };
+      localChats.push(msgData);
+      localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
+      renderChats();
+      input.value = '';
+      db.ref('chats/' + chatStudentId).push(msgData);
+    }
+
+    db.ref('chats/' + chatStudentId).on('child_added', (snapshot) => {
+      const data = snapshot.val();
+      const isDuplicate = localChats.some(c => c.timestamp === data.timestamp);
+      if (!isDuplicate && data.sender === 'admin') {
+        localChats.push(data);
+        localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
+        if(document.getElementById('chat-box').style.display === 'flex') renderChats();
+      }
+    });
 
     window.onload = () => {
         const savedTheme = localStorage.getItem("app_theme") || 'default';
