@@ -1,0 +1,22 @@
+{
+  "name": "Gurukul School App",
+  "short_name": "Gurukul App",
+  "description": "Gurukul Senior Secondary School Dhankoli App",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e0e5ec",
+  "theme_color": "#B85324",
+  "icons": [
+    {
+      "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
