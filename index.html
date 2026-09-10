@@ -5,8 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> GURUKUL SCHOOL APP </title>
   
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#B85324">
+  <link rel="apple-touch-icon" href="https://gsssdhankoli.github.io/Logo.png/logo.png">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- OneSignal Push Notifications SDK[span_0](start_span)[span_0](end_span) -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "3eeb8aed-088d-41f8-926e-70a399f73dc6",
+      });
+      // Auto-trigger prompt when user visits
+      OneSignal.Slidedown.promptPush();
+    });
+  </script>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/OneSignalSDKWorker.js').then(registration => {
+          console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+          console.log('SW registration failed: ', registrationError);
+        });
+      });
+    }
+  </script>
   
   <style>
     :root { 
@@ -347,7 +378,6 @@
     <button id="chat-toggle" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></button>
   </div>
 
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -455,7 +485,7 @@
             
             if (data.status === "success") {
                 localStorage.setItem("gurukul_student_roll", data.rollNo);
-                localStorage.setItem("gurukul_acc_status", data.accStatus); // Store status
+                localStorage.setItem("gurukul_acc_status", data.accStatus); 
                 setProfileDataUI(data);
                 document.getElementById('profileLoginSection').style.display = 'none';
                 document.getElementById('profileDataSection').style.display = 'block';
@@ -479,7 +509,7 @@
                 logoutStudent();
                 showCustomAlert('warning', 'Session Expired', 'आपका अकाउंट किसी अन्य डिवाइस पर लॉगिन किया गया है।');
             } else if (data.status === "success") {
-                localStorage.setItem("gurukul_acc_status", data.accStatus); // Update status silently
+                localStorage.setItem("gurukul_acc_status", data.accStatus); 
                 setProfileDataUI(data);
             } else { logoutStudent(); }
         } catch (err) {}
