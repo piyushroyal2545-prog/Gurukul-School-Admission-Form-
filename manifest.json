@@ -5,21 +5,20 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#e0e5ec",
+  "background_color": "#ffffff",
   "theme_color": "#B85324",
   "icons": [
     {
       "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
-
