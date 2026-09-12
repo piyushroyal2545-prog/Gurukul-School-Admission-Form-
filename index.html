@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title> GURUKUL SCHOOL APP </title>
+  <title>GURUKUL SCHOOL APP</title>
   
-  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#B85324">
   <link rel="apple-touch-icon" href="https://gsssdhankoli.github.io/Logo.png/logo.png">
@@ -13,7 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- OneSignal Push Notifications SDK[span_0](start_span)[span_0](end_span) -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -21,20 +19,18 @@
       await OneSignal.init({
         appId: "3eeb8aed-088d-41f8-926e-70a399f73dc6",
       });
-      // Auto-trigger prompt when user visits
-      OneSignal.Slidedown.promptPush();
+      if (OneSignal.Notifications.permission !== true) {
+        setTimeout(() => {
+          OneSignal.Slidedown.promptPush();
+        }, 3000);
+      }
     });
   </script>
 
-  <!-- PWA Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/OneSignalSDKWorker.js').then(registration => {
-          console.log('SW registered: ', registration);
-        }).catch(registrationError => {
-          console.log('SW registration failed: ', registrationError);
-        });
+        navigator.serviceWorker.register('/OneSignalSDKWorker.js').catch(e => console.log('SW registration failed:', e));
       });
     }
   </script>
@@ -144,7 +140,6 @@
     .custom-alert-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
     .alert-btn { background: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; }
 
-    /* -- Helpdesk Widget Styles -- */
     #gurukul-chat-widget { position: fixed; bottom: 100px; right: 20px; z-index: 9999; font-family: 'Poppins', sans-serif; }
     #chat-box { display: none; width: 300px; height: 350px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; margin-bottom: 15px; }
     #chat-header { background: var(--primary); color: white; padding: 12px; font-weight: 600; cursor: pointer; text-align: center; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -179,6 +174,13 @@
     </header>
 
     <main class="app-body">
+      <!-- 1-Click App Install Button (PWA) -->
+      <div id="installAppBox" style="display: none; background: linear-gradient(135deg, #25D366, #128C7E); padding: 15px; margin: 20px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);">
+        <h3 style="font-size: 15px; margin-bottom: 5px;">📱 हमारा स्कूल ऐप इंस्टॉल करें</h3>
+        <p style="font-size: 11px; margin-bottom: 10px;">बिना किसी झंझट के, सिर्फ 1 क्लिक में ऐप मोबाइल में सेव करें।</p>
+        <button id="installAppBtn" style="background: white; color: #128C7E; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 700; font-size: 13px; cursor: pointer;">Install App Now</button>
+      </div>
+
       <div class="greeting-section">
         <h2 id="greetingText">STUDENT DASHBOARD </h2>
         <p> कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करें।<br>★ हम आपके उज्जवल भविष्य की कामना करते हैं ★</p>
@@ -225,7 +227,8 @@
         </div>
       </div>
 
-      <div class="section-title"> ADMISSION OR FORMS </div>
+      
+<div class="section-title"> ADMISSION OR FORMS </div>
       <div class="portal-grid">
         <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div>
@@ -257,10 +260,8 @@
       </div>
     </nav>
 
-    <!-- Modals Overlay -->
     <div class="modal-overlay" id="overlay" onclick="closeAllModals()"></div>
 
-    <!-- Notification Modal -->
     <div class="bottom-sheet" id="notificationModal">
       <div class="sheet-header">
         <h3>नोटिफिकेशन्स</h3>
@@ -271,7 +272,6 @@
       </div>
     </div>
 
-    <!-- Profile/Login Modal -->
     <div class="bottom-sheet" id="profileModal">
       <div class="sheet-header">
         <h3>विद्यार्थी प्रोफाइल</h3>
@@ -314,7 +314,6 @@
       </div>
     </div>
 
-    <!-- Find Roll Number Modal -->
     <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
       <div class="sheet-header">
         <h3>रोल नंबर खोजें</h3>
@@ -333,7 +332,6 @@
       </div>
     </div>
 
-    <!-- Theme & Help Modals -->
     <div class="bottom-sheet" id="themeModal">
       <div class="sheet-header"><h3>SELECT THEME </h3><button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button></div>
       <div class="theme-grid">
@@ -352,7 +350,6 @@
     </div>
   </div>
 
-  <!-- Custom Alert Overlay -->
   <div class="custom-alert-overlay" id="customAlertOverlay">
     <div class="custom-alert-box">
       <div class="alert-icon" id="alertIcon"></div>
@@ -362,7 +359,6 @@
     </div>
   </div>
 
-  <!-- Gurukul Helpdesk Widget -->
   <div id="gurukul-chat-widget">
     <div id="chat-box">
       <div id="chat-header" onclick="toggleChat()">
@@ -384,14 +380,12 @@
   <script>
     const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx1WNu69vlJlFCNbY4w6AXhN5_2WNILM84_YCdRyIf4uNIPYpz17DmA6vS5cFYGGUU0/exec";
 
-    // --- Device ID System ---
     function getDeviceId() {
       let did = localStorage.getItem("device_id");
       if(!did) { did = 'DEV_' + Math.random().toString(36).substr(2, 9) + Date.now(); localStorage.setItem("device_id", did); }
       return did;
     }
 
-    // --- Custom Alerts ---
     function showCustomAlert(type, title, message) {
         const overlay = document.getElementById('customAlertOverlay');
         const iconDiv = document.getElementById('alertIcon');
@@ -405,7 +399,6 @@
     }
     function closeCustomAlert() { document.getElementById('customAlertOverlay').classList.remove('active'); }
 
-    // --- NEW: SMART PORTAL & BLOCK CHECK LOGIC ---
     function smartPortalOpen(url) {
         const roll = localStorage.getItem("gurukul_student_roll");
         const status = localStorage.getItem("gurukul_acc_status");
@@ -454,7 +447,6 @@
         } catch (err) { }
     }
 
-    // --- Profile & Login ---
     function openProfileLogic() {
         const savedRoll = localStorage.getItem("gurukul_student_roll");
         if (savedRoll) {
@@ -533,7 +525,6 @@
         document.getElementById('profileLoginSection').style.display = 'block';
     }
 
-    // --- Find Roll Number ---
     function openFindRollModal() { document.getElementById('profileModal').classList.remove('active'); document.getElementById('findRollModal').classList.add('active'); document.getElementById('rollResult').style.display = 'none'; }
     function closeFindRollModal() { document.getElementById('findRollModal').classList.remove('active'); document.getElementById('profileModal').classList.add('active'); }
 
@@ -582,7 +573,6 @@
       document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected')); if(element) element.classList.add('selected'); setTimeout(closeAllModals, 300);
     }
 
-    // --- Firebase Helpdesk Logic ---
     const firebaseConfig = {
       apiKey: "AIzaSyDJvnocepvxTX0KI4K5HzmMNQXlvyTKywc",
       authDomain: "gurukul-help-desk.firebaseapp.com",
@@ -641,6 +631,25 @@
         localChats.push(data);
         localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
         if(document.getElementById('chat-box').style.display === 'flex') renderChats();
+      }
+    });
+
+    // --- 1-Click Native App Install (PWA) Logic ---
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installAppBox').style.display = 'block';
+    });
+
+    document.getElementById('installAppBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          document.getElementById('installAppBox').style.display = 'none';
+        }
+        deferredPrompt = null;
       }
     });
 
