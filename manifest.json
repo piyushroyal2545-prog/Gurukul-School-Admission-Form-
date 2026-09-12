@@ -9,13 +9,13 @@
   "theme_color": "#B85324",
   "icons": [
     {
-      "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
+      "src": "https://gsssdhankoli.github.io/Logo.png/logo_new.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
+      "src": "https://gsssdhankoli.github.io/Logo.png/logo_new.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
