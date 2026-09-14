@@ -12,13 +12,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- OneSignal Push Notifications SDK with accurate sub-directory path -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "3eeb8aed-088d-41f8-926e-70a399f73dc6",
-        path: "/Gurukul-School-Admission-Form-/", // यह लाइन जोड़ी गई है
+        serviceWorkerParam: { scope: "/Gurukul-School-Admission-Form-/" },
+        serviceWorkerPath: "/Gurukul-School-Admission-Form-/OneSignalSDKWorker.js"
       });
       if (OneSignal.Notifications.permission !== true) {
         setTimeout(() => {
@@ -31,7 +33,6 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        // यहाँ / को हटाकर ./ किया गया है ताकि यह सही फोल्डर से फाइल उठाए
         navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(e => console.log('SW registration failed:', e));
       });
     }
@@ -249,74 +250,7 @@
 
     <nav class="bottom-nav">
       <div class="nav-item active" onclick="closeAllModals(); setActiveNav(this);">
-        <i class="fas fa-home"></i><span>होम</span>
-      </div>
-      <div class="nav-item" onclick="openModal('themeModal'); setActiveNav(this);">
-        <i class="fas fa-palette"></i><span>थीम</span>
-      </div>
-      <div class="nav-item" onclick="openModal('helpModal'); setActiveNav(this);">
-        <i class="fas fa-headset"></i><span>सपोर्ट</span>
-      </div>
-      <div class="nav-item" onclick="openProfileLogic(); setActiveNav(this);">
-        <i class="fas fa-user-circle"></i><span>प्रोफाइल</span>
-      </div>
-    </nav>
-
-    <div class="modal-overlay" id="overlay" onclick="closeAllModals()"></div>
-
-    <div class="bottom-sheet" id="notificationModal">
-      <div class="sheet-header">
-        <h3>नोटिफिकेशन्स</h3>
-        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
-      </div>
-      <div id="notiList">
-        <p style="text-align:center; color:#666; font-size:14px; padding:20px;">लोड हो रहे हैं...</p>
-      </div>
-    </div>
-
-    <div class="bottom-sheet" id="profileModal">
-      <div class="sheet-header">
-        <h3>विद्यार्थी प्रोफाइल</h3>
-        <button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
-      </div>
-      
-      <div id="profileLoginSection">
-        <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 20px;">सुरक्षित प्रोफाइल देखने के लिए लॉगिन करें।</p>
-        <div class="input-group">
-          <label>रोल नंबर (Roll Number)</label>
-          <input type="number" id="loginRollNo" placeholder="अपना रोल नंबर दर्ज करें">
-        </div>
-        <div class="input-group">
-          <label>रजिस्टर्ड मोबाइल नंबर</label>
-          <input type="number" id="loginMobile" placeholder="स्कूल में दिया गया मोबाइल नंबर">
-        </div>
-        <button class="btn-main" id="btnLogin" onclick="loginStudent()">लॉगिन करें</button>
-        <button class="btn-outline" onclick="openFindRollModal()">अपना रोल नंबर खोजें (Find Roll No)</button>
-      </div>
-
-      <div id="profileDataSection" style="display: none;">
-        <div class="profile-card-new">
-          <div class="prof-header-box">
-            <div class="prof-avatar"><i class="fas fa-user-graduate"></i></div>
-            <div class="prof-title">
-              <h3 id="profName">-</h3>
-              <p>Gurukul Sr. Sec. School</p>
-            </div>
-          </div>
-          <div class="prof-body-row"><span class="prof-label">पिता का नाम:</span><span class="prof-val" id="profFather">-</span></div>
-          <div class="prof-body-row"><span class="prof-label">कक्षा:</span><span class="prof-val" id="profClass">-</span></div>
-          <div class="prof-body-row"><span class="prof-label">मोबाइल:</span><span class="prof-val" id="profMobileMasked">-</span></div>
-          
-          <div class="roll-copy-box">
-            <span id="displayProfRollNo">000000</span>
-            <button class="copy-btn-small" onclick="copyProfRoll()"><i class="fas fa-copy"></i> Copy</button>
-          </div>
-        </div>
-        <button class="btn-main" style="background: #dc3545;" onclick="logoutStudent()">लॉगआउट</button>
-      </div>
-    </div>
-
-    <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
+   <div class="bottom-sheet" id="findRollModal" style="z-index: 1002;">
       <div class="sheet-header">
         <h3>रोल नंबर खोजें</h3>
         <button class="close-sheet" onclick="closeFindRollModal()"><i class="fas fa-arrow-left"></i></button>
@@ -467,7 +401,7 @@
         const mobile = document.getElementById('loginMobile').value;
         const btn = document.getElementById('btnLogin');
         
-        if (!roll || !mobile) { showCustomAlert('warning', 'जानकारी अधूरी है', 'रोल नंबर और मोबाइल नंबर दोनों दर्ज करें!'); return; }
+        if (!roll || !mobile) { showCustomAlert('warning', 'जानकारी अधूरी है', 'रोल नंबर और मोबाइल नंबर উভয় दर्ज करें!'); return; }
         
         btn.innerText = "सत्यापित हो रहा है..."; btn.disabled = true;
         
