@@ -18,6 +18,7 @@
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "3eeb8aed-088d-41f8-926e-70a399f73dc6",
+        path: "/Gurukul-School-Admission-Form-/", // यह लाइन जोड़ी गई है
       });
       if (OneSignal.Notifications.permission !== true) {
         setTimeout(() => {
@@ -30,7 +31,8 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/OneSignalSDKWorker.js').catch(e => console.log('SW registration failed:', e));
+        // यहाँ / को हटाकर ./ किया गया है ताकि यह सही फोल्डर से फाइल उठाए
+        navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(e => console.log('SW registration failed:', e));
       });
     }
   </script>
