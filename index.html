@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- OneSignal Push Notifications SDK with accurate sub-directory path -->
+  <!-- OneSignal Push Notifications SDK with Success Alert -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -22,20 +22,23 @@
         serviceWorkerParam: { scope: "/Gurukul-School-Admission-Form-/" },
         serviceWorkerPath: "/Gurukul-School-Admission-Form-/OneSignalSDKWorker.js"
       });
+
+      // जैसे ही मोबाइल सब्सक्राइब होगा, यह अलर्ट आ जाएगा
+      OneSignal.User.PushSubscription.addEventListener("change", function(e) {
+          if (e.current.optedIn) {
+              alert("✅ आपका मोबाइल सिस्टम से जुड़ गया है! अब एडमिन से मैसेज भेजें।");
+          }
+      });
+
       if (OneSignal.Notifications.permission !== true) {
         setTimeout(() => {
           OneSignal.Slidedown.promptPush();
         }, 3000);
+      } else {
+        // अगर पहले से Allow है, तो ज़बरदस्ती सब्सक्राइब करें
+        OneSignal.User.PushSubscription.optIn();
       }
     });
-  </script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(e => console.log('SW registration failed:', e));
-      });
-    }
   </script>
   
   <style>
@@ -97,7 +100,7 @@
     .input-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
     .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; }
     .input-group input:focus { border-color: var(--primary); }
-    .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 5px; }
+    .btn-main { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: margin-top: 5px; }
     .btn-outline { width: 100%; background: transparent; color: var(--primary); border: 2px solid var(--primary); padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 15px; }
 
     .noti-item { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; gap: 15px; align-items: flex-start; }
@@ -177,7 +180,6 @@
     </header>
 
     <main class="app-body">
-      <!-- 1-Click App Install Button (PWA) -->
       <div id="installAppBox" style="display: none; background: linear-gradient(135deg, #25D366, #128C7E); padding: 15px; margin: 20px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);">
         <h3 style="font-size: 15px; margin-bottom: 5px;">📱 हमारा स्कूल ऐप इंस्टॉल करें</h3>
         <p style="font-size: 11px; margin-bottom: 10px;">बिना किसी झंझट के, सिर्फ 1 क्लिक में ऐप मोबाइल में सेव करें।</p>
@@ -468,7 +470,7 @@
         const mobile = document.getElementById('loginMobile').value;
         const btn = document.getElementById('btnLogin');
         
-        if (!roll || !mobile) { showCustomAlert('warning', 'जानकारी अधूरी है', 'रोल नंबर और मोबाइल नंबर উভয় दर्ज करें!'); return; }
+        if (!roll || !mobile) { showCustomAlert('warning', 'जानकारी अधूरी है', 'रोल नंबर और मोबाइल नंबर दोनों दर्ज करें!'); return; }
         
         btn.innerText = "सत्यापित हो रहा है..."; btn.disabled = true;
         
@@ -637,7 +639,6 @@
       }
     });
 
-    // --- 1-Click Native App Install (PWA) Logic ---
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
