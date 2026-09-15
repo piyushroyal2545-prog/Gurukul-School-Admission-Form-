@@ -381,9 +381,10 @@
     
     function closeCustomAlert() { document.getElementById('customAlertOverlay').classList.remove('active'); }
 
-    // FAST & SECURE SMART PORTAL OPEN
+    // FAST & SECURE SMART PORTAL OPEN WITH ROLL NO & DOB
     function smartPortalOpen(url) {
         const roll = localStorage.getItem("gurukul_student_roll");
+        const dob = localStorage.getItem("gurukul_student_dob") || ""; // DOB यहाँ से उठाई
         const status = localStorage.getItem("gurukul_acc_status");
         
         if (!roll) {
@@ -392,12 +393,12 @@
         }
 
         if(status === "Partial Block" || status === "Blocked") {
-            showCustomAlert('error', 'Access Restricted 🚫', 'आपका पोर्टल एक्सेस रोक दिया गया है। कृपया फीस या अन्य जानकारी के लिए ऑफिस (9772564359) संपर्क करें।');
+            showCustomAlert('error', 'Access Restricted 🚫', 'आपका पोर्टल एक्सेस रोक दिया गया है। कृपया ऑफिस संपर्क करें।');
             return;
         }
 
-        // डायरेक्ट URL में #roll जोड़कर भेज दें, कोई डिले नहीं
-        window.location.href = url + "#roll=" + roll;
+        // लिंक के पीछे रोल नंबर और DOB दोनों भेज दिए
+        window.location.href = url + "#roll=" + roll + "&dob=" + dob;
     }
 
     const hour = new Date().getHours();
@@ -459,6 +460,7 @@
             
             if (data.status === "success") {
                 localStorage.setItem("gurukul_student_roll", data.rollNo);
+                if (data.dob) localStorage.setItem("gurukul_student_dob", data.dob); // DOB सेव
                 localStorage.setItem("gurukul_acc_status", data.accStatus); 
                 setProfileDataUI(data);
                 document.getElementById('profileLoginSection').style.display = 'none';
@@ -483,7 +485,8 @@
                 logoutStudent();
                 showCustomAlert('warning', 'Session Expired', 'आपका अकाउंट किसी अन्य डिवाइस पर लॉगिन किया गया है।');
             } else if (data.status === "success") {
-                localStorage.setItem("gurukul_acc_status", data.accStatus); 
+                localStorage.setItem("gurukul_acc_status", data.accStatus);
+                if (data.dob) localStorage.setItem("gurukul_student_dob", data.dob); // DOB सेव 
                 setProfileDataUI(data);
             } else { logoutStudent(); }
         } catch (err) {}
@@ -499,6 +502,7 @@
 
     function logoutStudent() {
         localStorage.removeItem("gurukul_student_roll");
+        localStorage.removeItem("gurukul_student_dob"); // लॉगआउट पर DOB भी क्लियर
         localStorage.removeItem("gurukul_acc_status");
         document.getElementById('loginRollNo').value = "";
         document.getElementById('loginMobile').value = "";
@@ -549,7 +553,6 @@
       document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected')); if(element) element.classList.add('selected'); setTimeout(closeAllModals, 300);
     }
 
-     // FIREBASE INITIALIZATION
     const firebaseConfig = {
       apiKey: "AIzaSyDJvnocepvxTX0KI4K5HzmMNQXlvyTKywc",
       authDomain: "gurukul-help-desk.firebaseapp.com",
@@ -562,7 +565,6 @@
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.database();
 
-    // SMART CHAT HELPDESK SCRIPT
     let localChats = JSON.parse(localStorage.getItem('gurukul_chats')) || [];
     const chatBody = document.getElementById('chat-body');
 
@@ -585,7 +587,6 @@
         const roll = localStorage.getItem("gurukul_student_roll");
         
         if (!roll) {
-           // Without Login - FAQ Bot Mode
            document.getElementById('chat-input-area').style.display = 'none';
            chatBody.innerHTML = `
              <div class="chat-msg admin" style="margin-bottom:15px; font-size:12px; line-height:1.5;">
@@ -596,7 +597,6 @@
              <button onclick="faqBotReply('contact')" style="width:100%; margin-bottom:8px; padding:10px; border-radius:8px; background:var(--primary-light); color:var(--text); border:1px solid var(--primary); font-size:12px; font-weight:600; cursor:pointer; text-align:left;">👉 स्कूल में बात करनी है (WhatsApp/Call)</button>
            `;
         } else {
-           // With Login - Real Live Chat Mode
            document.getElementById('chat-input-area').style.display = 'flex';
            renderChats();
         }
