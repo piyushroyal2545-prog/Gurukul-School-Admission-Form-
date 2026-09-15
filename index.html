@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Final OneSignal Push Notifications SDK (Alert Removed) -->
+  <!-- OneSignal Push Notifications SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -22,11 +22,8 @@
         serviceWorkerParam: { scope: "/Gurukul-School-Admission-Form-/" },
         serviceWorkerPath: "/Gurukul-School-Admission-Form-/OneSignalSDKWorker.js"
       });
-
       if (OneSignal.Notifications.permission !== true) {
-        setTimeout(() => {
-          OneSignal.Slidedown.promptPush();
-        }, 3000);
+        setTimeout(() => { OneSignal.Slidedown.promptPush(); }, 3000);
       }
     });
   </script>
@@ -110,10 +107,6 @@
     .prof-body-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; position: relative; z-index: 2; }
     .prof-label { opacity: 0.8; font-weight: 500; }
     .prof-val { font-weight: 700; }
-    .roll-copy-box { background: rgba(0,0,0,0.2); padding: 12px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 15px; position: relative; z-index: 2; border: 1px solid rgba(255,255,255,0.3); }
-    .roll-copy-box span { font-size: 18px; font-weight: 700; letter-spacing: 2px; }
-    .copy-btn-small { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; }
-    .copy-btn-small:active { transform: scale(0.95); }
 
     .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .theme-option { padding: 15px; border-radius: 12px; border: 2px solid var(--border); background: var(--card-bg); text-align: center; cursor: pointer; color: var(--text); font-weight: 600; font-size: 14px; }
@@ -177,7 +170,7 @@
       </div>
 
       <div class="greeting-section">
-        <h2 id="greetingText">STUDENT DASHBOARD </h2>
+        <h2 id="greetingText">STUDENT DASHBOARD</h2>
         <p> कोई परेशानी आने पर पहले अपना रजिस्ट्रेशन सुनिश्चित करें।<br>★ हम आपके उज्जवल भविष्य की कामना करते हैं ★</p>
       </div>
 
@@ -222,8 +215,7 @@
         </div>
       </div>
 
-      
-<div class="section-title"> ADMISSION OR FORMS </div>
+      <div class="section-title"> ADMISSION OR FORMS </div>
       <div class="portal-grid">
         <div onclick="smartPortalOpen('https://script.google.com/macros/s/AKfycby7jC80yVGPERc3m-t6iHaz47NilElqeMaTtDBekIrc_wC3UQg94KhU2kL5gh6N90Vy/exec')" class="grid-card">
           <div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div>
@@ -299,11 +291,6 @@
           <div class="prof-body-row"><span class="prof-label">पिता का नाम:</span><span class="prof-val" id="profFather">-</span></div>
           <div class="prof-body-row"><span class="prof-label">कक्षा:</span><span class="prof-val" id="profClass">-</span></div>
           <div class="prof-body-row"><span class="prof-label">मोबाइल:</span><span class="prof-val" id="profMobileMasked">-</span></div>
-          
-          <div class="roll-copy-box">
-            <span id="displayProfRollNo">000000</span>
-            <button class="copy-btn-small" onclick="copyProfRoll()"><i class="fas fa-copy"></i> Copy</button>
-          </div>
         </div>
         <button class="btn-main" style="background: #dc3545;" onclick="logoutStudent()">लॉगआउट</button>
       </div>
@@ -323,12 +310,11 @@
       <div id="rollResult" style="display: none; margin-top: 20px; text-align: center; background: rgba(40,167,69,0.1); padding: 15px; border-radius: 8px; border: 1px solid #28a745;">
         <p style="font-size: 13px; color: #333;">आपका रोल नंबर है:</p>
         <h2 id="displayRollNo" style="color: var(--primary); letter-spacing: 2px; margin: 5px 0;"></h2>
-        <button onclick="copyRollNo('displayRollNo')" style="background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 5px; font-size:12px; cursor: pointer;"><i class="fas fa-copy"></i> कॉपी करें</button>
       </div>
     </div>
 
     <div class="bottom-sheet" id="themeModal">
-      <div class="sheet-header"><h3>SELECT THEME </h3><button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button></div>
+      <div class="sheet-header"><h3>SELECT THEME</h3><button class="close-sheet" onclick="closeAllModals()"><i class="fas fa-times"></i></button></div>
       <div class="theme-grid">
         <div class="theme-option" onclick="setTheme('default', this)"> DEFAULT </div>
         <div class="theme-option" onclick="setTheme('diwali', this)"> DARK </div>
@@ -392,25 +378,26 @@
         else { iconDiv.className = 'alert-icon warning'; iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i>'; }
         overlay.classList.add('active');
     }
+    
     function closeCustomAlert() { document.getElementById('customAlertOverlay').classList.remove('active'); }
 
+    // FAST & SECURE SMART PORTAL OPEN
     function smartPortalOpen(url) {
         const roll = localStorage.getItem("gurukul_student_roll");
         const status = localStorage.getItem("gurukul_acc_status");
         
-        if(status === "Partial Block") {
+        if (!roll) {
+            showCustomAlert('warning', 'लॉगिन आवश्यक है', 'पोर्टल एक्सेस करने के लिए कृपया पहले अपनी प्रोफाइल में जाकर लॉगिन करें।');
+            return;
+        }
+
+        if(status === "Partial Block" || status === "Blocked") {
             showCustomAlert('error', 'Access Restricted 🚫', 'आपका पोर्टल एक्सेस रोक दिया गया है। कृपया फीस या अन्य जानकारी के लिए ऑफिस (9772564359) संपर्क करें।');
             return;
         }
 
-        if (roll) {
-            navigator.clipboard.writeText(roll).then(() => {
-                showCustomAlert('success', 'ऑटो-कॉपी सक्रिय ⚡', 'आपका रोल नंबर कॉपी कर लिया गया है। पोर्टल खुलने पर लॉगिन बॉक्स में उसे पेस्ट (Paste) करें।');
-                setTimeout(() => { window.location.href = url; }, 2500);
-            }).catch(() => { window.location.href = url; });
-        } else {
-            window.location.href = url;
-        }
+        // डायरेक्ट URL में #roll जोड़कर भेज दें, कोई डिले नहीं
+        window.location.href = url + "#roll=" + roll;
     }
 
     const hour = new Date().getHours();
@@ -506,7 +493,6 @@
         document.getElementById('profName').innerText = data.name;
         document.getElementById('profFather').innerText = data.fatherName;
         document.getElementById('profClass').innerText = data.className;
-        document.getElementById('displayProfRollNo').innerText = data.rollNo;
         let mobStr = String(data.mobile);
         document.getElementById('profMobileMasked').innerText = mobStr.substring(0, 4) + "XXXXXX";
     }
@@ -518,6 +504,7 @@
         document.getElementById('loginMobile').value = "";
         document.getElementById('profileDataSection').style.display = 'none';
         document.getElementById('profileLoginSection').style.display = 'block';
+        window.location.reload(); 
     }
 
     function openFindRollModal() { document.getElementById('profileModal').classList.remove('active'); document.getElementById('findRollModal').classList.add('active'); document.getElementById('rollResult').style.display = 'none'; }
@@ -549,12 +536,6 @@
         btn.innerText = "खोजें (Search)"; btn.disabled = false;
     }
 
-    function copyRollNo(elementId) {
-        const rollNo = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(rollNo).then(() => { showCustomAlert('success', 'सफल', 'रोल नंबर क्लिपबोर्ड पर कॉपी हो गया: ' + rollNo); });
-    }
-    function copyProfRoll() { copyRollNo('displayProfRollNo'); }
-
     const themesData = {
       'default': { bg: '#f4f6f9', bgImage: 'none', primary: '#B85324', primaryLight: 'rgba(184, 83, 36, 0.1)', nav: '#ffffff', card: '#ffffff', text: '#1a1a1a', textMuted: '#666666', border: '#eeeeee' },
       'diwali': { bg: '#121212', bgImage: 'linear-gradient(135deg, #1f0a0a 0%, #000000 100%)', primary: '#ff9800', primaryLight: 'rgba(255, 152, 0, 0.2)', nav: '#1e1e1e', card: '#242424', text: '#ffffff', textMuted: '#aaaaaa', border: '#333333' },
@@ -568,6 +549,7 @@
       document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected')); if(element) element.classList.add('selected'); setTimeout(closeAllModals, 300);
     }
 
+     // FIREBASE INITIALIZATION
     const firebaseConfig = {
       apiKey: "AIzaSyDJvnocepvxTX0KI4K5HzmMNQXlvyTKywc",
       authDomain: "gurukul-help-desk.firebaseapp.com",
@@ -580,12 +562,7 @@
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.database();
 
-    let chatStudentId = localStorage.getItem('gurukul_student_id');
-    if (!chatStudentId) {
-      chatStudentId = 'STU_' + Math.random().toString(36).substr(2, 9);
-      localStorage.setItem('gurukul_student_id', chatStudentId);
-    }
-    
+    // SMART CHAT HELPDESK SCRIPT
     let localChats = JSON.parse(localStorage.getItem('gurukul_chats')) || [];
     const chatBody = document.getElementById('chat-body');
 
@@ -603,31 +580,89 @@
     function toggleChat() {
       const box = document.getElementById('chat-box');
       box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-      if(box.style.display === 'flex') renderChats();
+
+      if (box.style.display === 'flex') {
+        const roll = localStorage.getItem("gurukul_student_roll");
+        
+        if (!roll) {
+           // Without Login - FAQ Bot Mode
+           document.getElementById('chat-input-area').style.display = 'none';
+           chatBody.innerHTML = `
+             <div class="chat-msg admin" style="margin-bottom:15px; font-size:12px; line-height:1.5;">
+               👋 नमस्ते! मैं गुरुकुल हेल्पबॉट हूँ। लाइव चैट के लिए लॉगिन ज़रूरी है। तब तक आप नीचे से अपनी समस्या चुन सकते हैं:
+             </div>
+             <button onclick="faqBotReply('roll')" style="width:100%; margin-bottom:8px; padding:10px; border-radius:8px; background:var(--primary-light); color:var(--text); border:1px solid var(--primary); font-size:12px; font-weight:600; cursor:pointer; text-align:left;">👉 मेरा रोल नंबर क्या है?</button>
+             <button onclick="faqBotReply('mobile')" style="width:100%; margin-bottom:8px; padding:10px; border-radius:8px; background:var(--primary-light); color:var(--text); border:1px solid var(--primary); font-size:12px; font-weight:600; cursor:pointer; text-align:left;">👉 मोबाइल नंबर गलत बता रहा है?</button>
+             <button onclick="faqBotReply('contact')" style="width:100%; margin-bottom:8px; padding:10px; border-radius:8px; background:var(--primary-light); color:var(--text); border:1px solid var(--primary); font-size:12px; font-weight:600; cursor:pointer; text-align:left;">👉 स्कूल में बात करनी है (WhatsApp/Call)</button>
+           `;
+        } else {
+           // With Login - Real Live Chat Mode
+           document.getElementById('chat-input-area').style.display = 'flex';
+           renderChats();
+        }
+      }
+    }
+
+    function faqBotReply(type) {
+        let replyText = "";
+        if(type === 'roll') {
+            replyText = "अपना रोल नंबर जानने के लिए 'प्रोफाइल' सेक्शन में जाएँ और 'Find Roll No' बटन दबाएं। वहां अपना और माताजी का नाम डालकर रोल नंबर प्राप्त करें।";
+        } else if(type === 'mobile') {
+            replyText = "लॉगिन के लिए वही मोबाइल नंबर चाहिए जो आपने स्कूल रिकॉर्ड में दिया है। नंबर बदलने या अपडेट करने के लिए स्कूल ऑफिस में संपर्क करें।";
+        } else if(type === 'contact') {
+            replyText = 'आप सीधा मैनेजमेंट से जुड़ सकते हैं:<br><br><a href="https://wa.me/919772564359" target="_blank" style="color:#25D366; font-weight:700; text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp करें</a><br><br><a href="tel:9772564359" style="color:var(--primary); font-weight:700; text-decoration:none;"><i class="fas fa-phone-alt"></i> Call करें (9772564359)</a>';
+        }
+        
+        const div = document.createElement('div');
+        div.className = 'chat-msg admin';
+        div.style.marginTop = "10px";
+        div.innerHTML = replyText;
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
     }
 
     function sendChatMsg() {
+      const roll = localStorage.getItem("gurukul_student_roll");
+      if (!roll) return; 
+
+      let stName = document.getElementById('profName').innerText;
+      if(!stName || stName === '-') stName = "Unknown Student";
+
       const input = document.getElementById('chat-input');
       const text = input.value.trim();
       if (!text) return;
+
+      const chatStudentId = "Student_" + roll; 
+
+      const msgData = { 
+          sender: 'student', 
+          text: text, 
+          timestamp: Date.now(),
+          studentName: stName,
+          rollNo: roll
+      };
       
-      const msgData = { sender: 'student', text: text, timestamp: Date.now() };
-      localChats.push(msgData);
+      localChats.push({ sender: 'student', text: text, timestamp: msgData.timestamp });
       localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
       renderChats();
       input.value = '';
+
       db.ref('chats/' + chatStudentId).push(msgData);
     }
 
-    db.ref('chats/' + chatStudentId).on('child_added', (snapshot) => {
-      const data = snapshot.val();
-      const isDuplicate = localChats.some(c => c.timestamp === data.timestamp);
-      if (!isDuplicate && data.sender === 'admin') {
-        localChats.push(data);
-        localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
-        if(document.getElementById('chat-box').style.display === 'flex') renderChats();
-      }
-    });
+    const savedRollChat = localStorage.getItem("gurukul_student_roll");
+    if (savedRollChat) {
+       const chatStudentId = "Student_" + savedRollChat;
+       db.ref('chats/' + chatStudentId).on('child_added', (snapshot) => {
+         const data = snapshot.val();
+         const isDuplicate = localChats.some(c => c.timestamp === data.timestamp);
+         if (!isDuplicate && data.sender === 'admin') {
+           localChats.push({ sender: 'admin', text: data.text, timestamp: data.timestamp });
+           localStorage.setItem('gurukul_chats', JSON.stringify(localChats));
+           if(document.getElementById('chat-box').style.display === 'flex') renderChats();
+         }
+       });
+    }
 
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
