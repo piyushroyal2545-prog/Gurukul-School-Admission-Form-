@@ -9,8 +9,8 @@
   "theme_color": "#B85324",
   "icons": [
     {
-      "src": "logo_new.png",
-      "sizes": "300x300",
+      "src": "https://gsssdhankoli.github.io/Logo.png/logo.png",
+      "sizes": "192×192",
       "type": "image/png",
       "purpose": "any"
     },
