@@ -788,5 +788,466 @@
         }
     };
   </script>
+  <!-- ====== START: STUDENT APP AUTO-TIMER DIWALI POP-UP (1 NOV TO 9 NOV 2026) ====== -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  #stuDiwaliPopupOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: radial-gradient(circle at center, rgba(10, 15, 44, 0.88) 0%, rgba(3, 5, 18, 0.96) 100%);
+    backdrop-filter: blur(12px);
+    display: none; /* Auto-timer sahi date hone par isse 'flex' karega */
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  #stuSkyCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .stu-diwali-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 430px;
+    border-radius: 28px;
+    padding: 38px 20px 24px;
+    text-align: center;
+    color: #ffffff;
+    background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+    border: 2.5px solid #facc15;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.7),
+      0 0 45px rgba(250, 204, 21, 0.35),
+      inset 0 0 25px rgba(250, 204, 21, 0.15);
+    animation: stuCardZoom 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    overflow: hidden;
+  }
+
+  @keyframes stuCardZoom {
+    from { opacity: 0; transform: scale(0.78) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Top Marigold Toran (बंदनवार) */
+  .stu-toran-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .stu-toran-Loop {
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, #fde047 20%, #f97316 75%, #dc2626 100%);
+    border-radius: 50%;
+    margin-top: -8px;
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.6);
+    animation: stuToranBob 1.8s ease-in-out infinite alternate;
+  }
+  .stu-toran-Loop:nth-child(even) {
+    background: radial-gradient(circle, #fef08a 20%, #eab308 75%, #ca8a04 100%);
+    animation-delay: 0.4s;
+  }
+
+  @keyframes stuToranBob {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(3px); }
+  }
+
+  /* School Logo Ring */
+  .stu-logo-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: 4px auto 10px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, #fde047, #f97316, #fde047);
+    box-shadow: 0 0 22px rgba(250, 204, 21, 0.75);
+    animation: stuPulseGlow 2s infinite alternate;
+  }
+
+  @keyframes stuPulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 15px rgba(250, 204, 21, 0.6); }
+    100% { transform: scale(1.06); box-shadow: 0 0 28px rgba(250, 204, 21, 0.95); }
+  }
+
+  .stu-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    object-fit: contain;
+    padding: 2px;
+  }
+
+  .stu-school-pill {
+    display: inline-block;
+    background: rgba(250, 204, 21, 0.15);
+    border: 1px solid rgba(250, 204, 21, 0.5);
+    color: #fde047;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+
+  .stu-fest-heading {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(24px, 6vw, 34px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin: 4px 0;
+    background: linear-gradient(90deg, #fde047, #ffffff, #f97316, #fde047);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: stuTextShimmer 3s linear infinite;
+  }
+
+  @keyframes stuTextShimmer {
+    to { background-position: 200% center; }
+  }
+
+  .stu-sub-wish {
+    font-size: 13px;
+    color: #e2e8f0;
+    line-height: 1.5;
+    margin: 6px auto 14px;
+    max-width: 360px;
+  }
+
+  /* Special Holiday Notice Box for Students */
+  .stu-holiday-box {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border: 1.5px dashed #facc15;
+    border-radius: 18px;
+    padding: 12px 14px;
+    margin: 10px 0 16px;
+    box-shadow: inset 0 0 15px rgba(250, 204, 21, 0.12);
+  }
+
+  .stu-holiday-tag {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 9px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 5px;
+  }
+
+  .stu-holiday-dates {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fde047;
+    margin: 2px 0;
+  }
+
+  .stu-holiday-note {
+    font-size: 11.5px;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* Animated Floating Diyas Row */
+  .stu-diya-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 10px 0 16px;
+  }
+
+  .stu-diya-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 4px 10px rgba(249, 115, 22, 0.65));
+  }
+  .stu-diya-item:active { transform: scale(1.2); }
+
+  .stu-flame-anim {
+    transform-origin: bottom center;
+    animation: stuFlameDance 0.9s infinite alternate;
+  }
+
+  @keyframes stuFlameDance {
+    0% { transform: scale(1) rotate(-3deg); }
+    100% { transform: scale(0.92, 1.1) rotate(3deg); }
+  }
+
+  /* Action Buttons */
+  .stu-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stu-firework-btn {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(250, 204, 21, 0.6);
+    background: rgba(250, 204, 21, 0.15);
+    color: #fde047;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .stu-firework-btn:active {
+    transform: scale(0.96);
+    background: rgba(250, 204, 21, 0.28);
+  }
+
+  .stu-enter-btn {
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 16px;
+    border: none;
+    background: linear-gradient(135deg, #facc15 0%, #f97316 55%, #ea580c 100%);
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(249, 115, 22, 0.5);
+    transition: transform 0.2s;
+  }
+  .stu-enter-btn:active { transform: scale(0.96); }
+</style>
+
+<div id="stuDiwaliPopupOverlay">
+  <canvas id="stuSkyCanvas"></canvas>
+
+  <div class="stu-diwali-card">
+    <!-- Top Marigold Toran -->
+    <div class="stu-toran-bar">
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+      <div class="stu-toran-Loop"></div>
+    </div>
+
+    <!-- School Logo -->
+    <div class="stu-logo-wrap">
+      <img src="https://gsssdhankoli.github.io/Logo.png/logo.png" alt="Gurukul Logo">
+    </div>
+
+    <div class="stu-school-pill">GURUKUL SR. SEC. SCHOOL, DHANKOLI</div>
+    <h1 class="stu-fest-heading">HAPPY DIWALI</h1>
+    <p class="stu-sub-wish">
+      समस्त विद्यार्थियों एवं अभिभावकों को दीपावली के पावन पर्व की हार्दिक शुभकामनाएं! माँ सरस्वती और माँ लक्ष्मी आपके जीवन को ज्ञान व खुशियों से रोशन करें।
+    </p>
+
+    <!-- Student Holiday Notice Box -->
+    <div class="stu-holiday-box">
+      <span class="stu-holiday-tag">🔔 DIWALI VACATION NOTICE</span>
+      <div class="stu-holiday-dates">📅विद्यालय अवकाश की सूचना नोटिफिकेशन सेक्शन में देखे। </div>
+      <p class="stu-holiday-note">सुरक्षित और खुशहाल त्योहार मनाएं!</p>
+    </div>
+
+    <!-- Interactive Diyas -->
+    <div class="stu-diya-strip">
+      <svg class="stu-diya-item" width="52" height="52" viewBox="0 0 100 100" onclick="triggerStuShot()">
+        <path class="stu-flame-anim" d="M50 12 C62 30 64 45 50 54 C36 45 38 30 50 12 Z" fill="#f97316"/>
+        <path class="stu-flame-anim" d="M50 24 C56 35 57 45 50 52 C43 45 44 35 50 24 Z" fill="#fef08a"/>
+        <path d="M12 54 Q50 68 88 54 Q78 86 50 86 Q22 86 12 54 Z" fill="#7c2d12" stroke="#facc15" stroke-width="3"/>
+      </svg>
+
+      <svg class="stu-diya-item" width="66" height="66" viewBox="0 0 100 100" onclick="triggerStuShot()">
+        <path class="stu-flame-anim" d="M50 8 C65 28 67 45 50 54 C33 45 35 28 50 8 Z" fill="#f97316"/>
+        <path class="stu-flame-anim" d="M50 20 C58 34 59 45 50 52 C41 45 42 34 50 20 Z" fill="#ffffff"/>
+        <path d="M10 54 Q50 70 90 54 Q80 88 50 88 Q20 88 10 54 Z" fill="#9a3412" stroke="#fde047" stroke-width="3.5"/>
+      </svg>
+
+      <svg class="stu-diya-item" width="52" height="52" viewBox="0 0 100 100" onclick="triggerStuShot()">
+        <path class="stu-flame-anim" d="M50 12 C62 30 64 45 50 54 C36 45 38 30 50 12 Z" fill="#f97316"/>
+        <path class="stu-flame-anim" d="M50 24 C56 35 57 45 50 52 C43 45 44 35 50 24 Z" fill="#fef08a"/>
+        <path d="M12 54 Q50 68 88 54 Q78 86 50 86 Q22 86 12 54 Z" fill="#7c2d12" stroke="#facc15" stroke-width="3"/>
+      </svg>
+    </div>
+
+    <div class="stu-btn-group">
+      <button type="button" class="stu-firework-btn" onclick="triggerStuShot()">
+        🎆 पटाखे फोड़ें (Tap for Sky Fireworks!)
+      </button>
+      <button type="button" class="stu-enter-btn" onclick="closeStuDiwaliPopup()">
+        ✨ Open Student App →
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // --- 1. AUTO DATE-CHECK (1 November 2026 to 9 November 2026) ---
+    // Note: JavaScript me Month 0 se shuru hota hai (0 = Jan, 10 = November)
+    const now = new Date();
+    const startDate = new Date(2026, 10, 1, 0, 0, 0);     // 1 Nov 2026, 12:00 AM
+    const endDate   = new Date(2026, 10, 9, 23, 59, 59);  // 9 Nov 2026, 11:59:59 PM
+
+    // Agar aap aaj (31 Oct) test karna chahte hain, to niche wali line me false ko true kar sakte hain:
+    const TEST_MODE_TODAY = false;
+
+    const isWithinDiwaliWeek = (now >= startDate && now <= endDate) || TEST_MODE_TODAY;
+    const overlay = document.getElementById('stuDiwaliPopupOverlay');
+
+    if (!isWithinDiwaliWeek || !overlay) {
+      if (overlay) overlay.remove();
+      return; // 1 Nov se pehle aur 9 Nov ke baad code yahi ruk jayega
+    }
+
+    // Sahi date hone par pop-up dikhao
+    overlay.style.display = 'flex';
+
+    // --- 2. SKY-SHOT FIREWORKS & FLOATING LANTERNS ANIMATION ---
+    const canvas = document.getElementById('stuSkyCanvas');
+    const ctx = canvas.getContext('2d');
+    let sparks = [];
+    let lanterns = [];
+    let rafId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Floating Sky Lanterns (आकाश कंदील)
+    for (let i = 0; i < 12; i++) {
+      lanterns.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 4 + Math.random() * 5,
+        speedY: 0.35 + Math.random() * 0.5,
+        sway: Math.random() * Math.PI * 2
+      });
+    }
+
+    const palette = ['#fde047', '#f97316', '#38bdf8', '#f43f5e', '#a855f7', '#4ade80'];
+
+    function createExplosion(cx, cy) {
+      const color = palette[Math.floor(Math.random() * palette.length)];
+      for (let i = 0; i < 42; i++) {
+        const angle = (Math.PI * 2 * i) / 42;
+        const velocity = 1.6 + Math.random() * 4.2;
+        sparks.push({
+          x: cx,
+          y: cy,
+          vx: Math.cos(angle) * velocity,
+          vy: Math.sin(angle) * velocity,
+          alpha: 1,
+          color: i % 3 === 0 ? '#ffffff' : color,
+          size: 2 + Math.random() * 2.2
+        });
+      }
+    }
+
+    window.triggerStuShot = function() {
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          createExplosion(
+            canvas.width * (0.15 + Math.random() * 0.7),
+            canvas.height * (0.12 + Math.random() * 0.45)
+          );
+        }, i * 180);
+      }
+    };
+
+    window.closeStuDiwaliPopup = function() {
+      cancelAnimationFrame(rafId);
+      overlay.remove();
+    };
+
+    let frame = 0;
+    function renderLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+
+      // Draw rising sky lanterns
+      lanterns.forEach(l => {
+        l.y -= l.speedY;
+        l.sway += 0.02;
+        l.x += Math.sin(l.sway) * 0.3;
+        if (l.y < -20) {
+          l.y = canvas.height + 20;
+          l.x = Math.random() * canvas.width;
+        }
+        ctx.save();
+        ctx.globalAlpha = 0.55;
+        ctx.fillStyle = '#fb923c';
+        ctx.shadowColor = '#fde047';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.arc(l.x, l.y, l.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Auto burst every 40 frames
+      if (frame % 40 === 0) {
+        createExplosion(
+          canvas.width * (0.15 + Math.random() * 0.7),
+          canvas.height * (0.12 + Math.random() * 0.45)
+        );
+      }
+
+      // Draw firework sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.045; // gravity
+        s.alpha -= 0.017;
+        if (s.alpha <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = s.alpha;
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      rafId = requestAnimationFrame(renderLoop);
+    }
+
+    // Initial welcome burst
+    triggerStuShot();
+    renderLoop();
+  })();
+</script>
+<!-- ====== END: STUDENT APP AUTO-TIMER DIWALI POP-UP ====== -->
+  
 </body>
 </html>
