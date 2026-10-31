@@ -1115,7 +1115,7 @@
     const endDate   = new Date(2026, 10, 9, 23, 59, 59);  // 9 Nov 2026, 11:59:59 PM
 
     // Agar aap aaj (31 Oct) test karna chahte hain, to niche wali line me false ko true kar sakte hain:
-    const TEST_MODE_TODAY = false;
+    const TEST_MODE_TODAY = true;
 
     const isWithinDiwaliWeek = (now >= startDate && now <= endDate) || TEST_MODE_TODAY;
     const overlay = document.getElementById('stuDiwaliPopupOverlay');
